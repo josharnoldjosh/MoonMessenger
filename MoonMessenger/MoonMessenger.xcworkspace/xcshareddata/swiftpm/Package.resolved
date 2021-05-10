@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Preview",
+        "repositoryURL": "https://github.com/joshuajhomann/Preview",
+        "state": {
+          "branch": null,
+          "revision": "9e463fdee264c8976646fc21ed88e14bc0d99ef7",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
