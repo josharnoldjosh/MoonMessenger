@@ -28,7 +28,7 @@ class TextField : UIView {
         
         textfield = UITextField()
         textfield.tintColor = UIColor(white: 1.0, alpha: 0.5)
-        textfield.font = .bodyReadable
+        textfield.font = .body
         textfield.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor : UIColor(white: 1, alpha: 0.5), .font : UIFont.body])
         textfield.textColor = .white
         addSubview(textfield)
@@ -40,7 +40,7 @@ class TextField : UIView {
             make.left.equalToSuperview()
             make.width.equalTo(16)
             make.height.equalTo(16)
-            make.centerY.equalToSuperview().offset(2)
+            make.centerY.equalToSuperview().offset(-2)
         }
         
         textfield.snp.makeConstraints { make in
@@ -49,8 +49,8 @@ class TextField : UIView {
         }
         
         line.snp.makeConstraints { make in
-            make.top.equalTo(self.imageView.snp.bottom).offset(20)
-            make.width.equalToSuperview()
+            make.top.equalTo(self.imageView.snp.bottom).offset(30)
+            make.width.equalTo(100)
             make.centerX.equalToSuperview()
             make.height.equalTo(2)
         }

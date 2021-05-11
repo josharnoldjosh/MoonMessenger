@@ -19,7 +19,7 @@ class IntroViewController: UIViewController {
     
     var moonImageView = UIImageView(image: UIImage(named: "Moon") ?? UIImage())
     var backgroundImage = UIImageView(image: UIImage(named: "NightSky") ?? UIImage())
-    var titleLabel:UILabel = UILabel.title()
+    var titleLabel:UILabel = UILabel.title(text: "Neptune")
     var bodyLabel:UILabel = UILabel.body()
     var signup:ShinyButton!
     var login:TextButton!
@@ -39,13 +39,12 @@ class IntroViewController: UIViewController {
         moonImageView.hero.modifiers = [.duration(2.0)]
         moonImageView.transform = CGAffineTransform.init(rotationAngle: -1.35)
         view.addSubview(moonImageView)
-        
-        titleLabel.text = "Moon."
+                
         titleLabel.alpha = 0
         titleLabel.hero.id = "title"
         view.addSubview(titleLabel)
         
-        bodyLabel.text = "Beautiful, secure, messaging."
+        bodyLabel.text = "Decentralized messaging."
         bodyLabel.alpha = 0
         view.addSubview(bodyLabel)
         
@@ -56,7 +55,7 @@ class IntroViewController: UIViewController {
         signup.alpha = 0
         view.addSubview(signup)
         
-        login = TextButton("Have an account?") {
+        login = TextButton("Already have an account?") {
             self.loginUser()
         }
         login.hero.id = "login"
@@ -77,11 +76,11 @@ class IntroViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.width.equalToSuperview()
             make.height.lessThanOrEqualToSuperview()
-            make.bottom.equalTo(self.bodyLabel.snp.top)
+            make.bottom.equalTo(self.bodyLabel.snp.top).offset(-10)
         }
         
         bodyLabel.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(20)
+            make.width.equalToSuperview().inset(50)
             make.height.lessThanOrEqualToSuperview()
             make.centerX.equalToSuperview()
             make.bottom.equalTo(self.signup.snp.top).offset(-50)

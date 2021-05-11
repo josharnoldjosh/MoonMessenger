@@ -38,8 +38,8 @@ class ShinyButton : UIView {
         // Button
         addSubview(button)
         button.setTitle(title, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .body
+        button.setTitleColor(UIColor(white: 1, alpha: 0.8), for: .normal)
+        button.titleLabel?.font = .caption
         button.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
         return .portrait
     }
     
-    var titleLabel:UILabel = UILabel.title()
+    var titleLabel:UILabel = UILabel.title(text: "Login")
     var signup:ShinyButton!
     var login:TextButton!
     var moonBackground:UIImageView = UIImageView(image: UIImage(named: "LoginMoon")!)
@@ -39,8 +39,7 @@ class LoginViewController: UIViewController {
         moonBackground.alpha = 0
         moonBackground.transform = CGAffineTransform(translationX: 0, y: -100)
         view.addSubview(moonBackground)
-        
-        titleLabel.text = "Login."
+                
         titleLabel.alpha = 0
         titleLabel.transform = CGAffineTransform(translationX: 0, y: 20)
         view.addSubview(titleLabel)
@@ -48,7 +47,7 @@ class LoginViewController: UIViewController {
         signup = ShinyButton("Continue") {
             self.loginUser()
         }
-        signup.hero.id = "topButton"
+        signup.hero.id = "signup"
         signup.hero.modifiers = [.duration(0.5)]
         view.addSubview(signup)
         

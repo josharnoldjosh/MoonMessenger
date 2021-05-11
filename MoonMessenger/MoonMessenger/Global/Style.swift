@@ -15,11 +15,11 @@ extension UIColor {
     }
     
     static var primary:UIColor {
-        return UIColor(red: 0.35, green: 0.12, blue: 1.00, alpha: 1.00)
+        return UIColor(red: 0.56, green: 0.00, blue: 0.91, alpha: 1.00)
     }
     
     static var secondary:UIColor {
-        return UIColor(red: 1.00, green: 0.15, blue: 0.82, alpha: 1.00)    
+        return UIColor(red: 0.36, green: 0.13, blue: 1.00, alpha: 1.00)
     }
     
     static var darkShadow:UIColor {
@@ -30,28 +30,24 @@ extension UIColor {
 
 extension UIFont {
     static var body:UIFont {
-        return UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont(name: "Pacifico-Regular", size: 16) ?? UIFont.systemFont(ofSize: UIFont.labelFontSize))
+        return UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont(name: "AvenirNext-Medium", size: 16) ?? UIFont.systemFont(ofSize: UIFont.labelFontSize))
     }
     
     static var caption:UIFont {
-        return UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont(name: "Pacifico-Regular", size: 14) ?? UIFont.systemFont(ofSize: UIFont.labelFontSize))
-    }
-    
-    static var bodyReadable:UIFont {        
-        return UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont(name: "HelveticaNeue-Medium", size: 15) ?? UIFont.systemFont(ofSize: UIFont.labelFontSize))
-    }
+        return UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont(name: "AvenirNext-Medium", size: 14) ?? UIFont.systemFont(ofSize: UIFont.labelFontSize))
+    }        
 }
 
 
 extension UILabel {
     
     
-     static func title() -> UILabel {
+    static func title(text: String="Hello") -> UILabel {
         let label = UILabel()
         label.adjustsFontForContentSizeCategory = true
-        label.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: UIFont(name: "Pacifico-Regular", size: 40) ?? UIFont.systemFont(ofSize: UIFont.labelFontSize))
+        label.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: UIFont(name: "AvenirNext-Regular", size: 40) ?? UIFont.systemFont(ofSize: UIFont.labelFontSize))
         label.textColor = .white
-        label.text = "Hello world."
+        label.attributedText = NSAttributedString(string: text, attributes: [.kern : 10])
         label.textAlignment = .center
         label.numberOfLines = 2
         return label

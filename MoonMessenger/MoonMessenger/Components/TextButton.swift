@@ -31,20 +31,14 @@ class TextButton : UIView {
         button.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        // Start touch
+    
+            
         button.on(.touchDown) { a, b in
             self.animateDown()
-        }
-                
-        // Succeed touch
-        button.on(.touchUpInside) { a, b in
+        }.on(.touchUpInside) { a, b in
             self.animateUp()
             onTap()
-        }
-        
-        // Cancel touch
-        button.on([.touchCancel, .touchUpOutside, .touchDragOutside, .touchDragExit]) { a, b in
+        }.on([.touchCancel, .touchUpOutside, .touchDragOutside, .touchDragExit]) { a, b in
             self.animateUp()
         }
     }

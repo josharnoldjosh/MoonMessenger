@@ -14,8 +14,8 @@ import Closures
 
 class WelcomeViewController : UIViewController {
     
-    var daeView:ExploreObjectView = ExploreObjectView(zoom: 9)
-    var titleLabel:UILabel = UILabel.title()
+    var daeView:ExploreObjectView = ExploreObjectView(zoom: 5)
+    var titleLabel:UILabel = UILabel.title(text: "Neptune")
     var bodyLabel:UILabel = UILabel.body()
     var continueButton:ShinyButton!
     
@@ -29,19 +29,20 @@ class WelcomeViewController : UIViewController {
     func setupUI() {
         daeView.alpha = 0
         view.addSubview(daeView)
-        
-        titleLabel.text = "Moon."
         titleLabel.alpha = 0
+        titleLabel.transform = CGAffineTransform(translationX: 0, y: -20)
         view.addSubview(titleLabel)
         
-        bodyLabel.text = "Beautiful, secure, messaging."
+        bodyLabel.text = "Decentralized messaging."
         bodyLabel.alpha = 0
+        bodyLabel.transform = CGAffineTransform(translationX: 0, y: -20)
         view.addSubview(bodyLabel)
                 
         continueButton = ShinyButton("Start Messaging") {
             self.goToHome()
         }
         continueButton.alpha = 0
+        continueButton.transform = CGAffineTransform(translationX: 0, y: 20)
         view.addSubview(continueButton)
     }
     
@@ -74,11 +75,14 @@ class WelcomeViewController : UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 2) {
             self.titleLabel.alpha = 1
             self.bodyLabel.alpha = 0.5
+            self.bodyLabel.transform = .identity
+            self.titleLabel.transform = .identity
             self.daeView.alpha = 1
             self.continueButton.alpha = 1
+            self.continueButton.transform = .identity
         }
     }
     
