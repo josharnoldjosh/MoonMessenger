@@ -87,7 +87,12 @@ class WelcomeViewController : UIViewController {
     }
     
     func goToHome() {
-        print("Yessir!")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let vc = ConvoViewController()
+            vc.modalPresentationStyle = .fullScreen
+            vc.heroModalAnimationType = .zoomOut
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 }
 

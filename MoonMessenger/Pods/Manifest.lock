@@ -7,6 +7,9 @@ PODS:
     - Parse/Core (= 1.19.1)
   - Parse/Core (1.19.1):
     - Bolts/Tasks (= 1.9.1)
+  - pop (1.0.12)
+  - PopBounceButton (1.2.2):
+    - pop (~> 1.0)
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
@@ -14,6 +17,7 @@ DEPENDENCIES:
   - Hero
   - lottie-ios
   - Parse
+  - PopBounceButton
   - SnapKit
 
 SPEC REPOS:
@@ -23,6 +27,8 @@ SPEC REPOS:
     - Hero
     - lottie-ios
     - Parse
+    - pop
+    - PopBounceButton
     - SnapKit
 
 SPEC CHECKSUMS:
@@ -31,8 +37,10 @@ SPEC CHECKSUMS:
   Hero: b7385b75e7259da62f4f85462f59a5082d66b058
   lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
   Parse: e40fdb9c7d665823b7fe9865949cac9a53eb2ce7
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
+  PopBounceButton: 34105a012678222f058f8d2621672724a3d5c9fb
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: fcd828297ecbf361ef5a046dacc1d44ad7bf8f75
+PODFILE CHECKSUM: dc689a014cb8da2c7692f9d3fe98883ee44321a0
 
 COCOAPODS: 1.10.1

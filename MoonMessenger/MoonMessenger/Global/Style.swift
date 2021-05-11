@@ -71,4 +71,8 @@ struct Impact {
     static func button() {
         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
     }
+    
+    static func hint() {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    }
 }

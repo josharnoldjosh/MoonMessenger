@@ -130,10 +130,10 @@ class SignupViewController: UIViewController {
         super.viewDidAppear(animated)
         
         UIView.animate(
-            withDuration: 0.9,
+            withDuration: 1.0,
                     delay: 0,
-            usingSpringWithDamping: 0.6,
-            initialSpringVelocity: 0.7,
+            usingSpringWithDamping: 0.8,
+            initialSpringVelocity: 0.3,
                     options: [],
                     animations: {
                         self.titleLabel.alpha = 1

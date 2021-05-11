@@ -26,6 +26,8 @@
 		7948A8CD2649BE2300FDF493 /* ExploreObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948A8CC2649BE2300FDF493 /* ExploreObjectView.swift */; };
 		7948A8D52649C2E400FDF493 /* moon.dae in Resources */ = {isa = PBXBuildFile; fileRef = 7948A8D32649C2E400FDF493 /* moon.dae */; };
 		7948A8D62649C2E400FDF493 /* Moon_Base_Color.png in Resources */ = {isa = PBXBuildFile; fileRef = 7948A8D42649C2E400FDF493 /* Moon_Base_Color.png */; };
+		7948ABE0264B31B3006340EB /* ConvoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948ABDF264B31B3006340EB /* ConvoViewController.swift */; };
+		7948ABE2264B32AB006340EB /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948ABE1264B32AB006340EB /* ImageButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		7948A8CC2649BE2300FDF493 /* ExploreObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreObjectView.swift; sourceTree = "<group>"; };
 		7948A8D32649C2E400FDF493 /* moon.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = moon.dae; sourceTree = "<group>"; };
 		7948A8D42649C2E400FDF493 /* Moon_Base_Color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Moon_Base_Color.png; sourceTree = "<group>"; };
+		7948ABDF264B31B3006340EB /* ConvoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoViewController.swift; sourceTree = "<group>"; };
+		7948ABE1264B32AB006340EB /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		8DC0316EF88765DAAC3CAE22 /* Pods-MoonMessenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoonMessenger.release.xcconfig"; path = "Target Support Files/Pods-MoonMessenger/Pods-MoonMessenger.release.xcconfig"; sourceTree = "<group>"; };
 		B8562D25EE9919033B17DE4C /* Pods-MoonMessenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoonMessenger.debug.xcconfig"; path = "Target Support Files/Pods-MoonMessenger/Pods-MoonMessenger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +77,7 @@
 				790B581126499B7C00605696 /* TextField.swift */,
 				792862E62649842E00BD5172 /* ShinyButton.swift */,
 				790B580D264992F200605696 /* TextButton.swift */,
+				7948ABE1264B32AB006340EB /* ImageButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 				790B580F264996B300605696 /* SignupViewController.swift */,
 				790B58132649A3FF00605696 /* LoginViewController.swift */,
 				790F22972649C656000B2B59 /* WelcomeViewController.swift */,
+				7948ABDF264B31B3006340EB /* ConvoViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -287,9 +293,11 @@
 				792BC6BB264856B50016E411 /* AppDelegate.swift in Sources */,
 				792862E72649842E00BD5172 /* ShinyButton.swift in Sources */,
 				790B581226499B7C00605696 /* TextField.swift in Sources */,
+				7948ABE0264B31B3006340EB /* ConvoViewController.swift in Sources */,
 				792BC6BD264856B50016E411 /* SceneDelegate.swift in Sources */,
 				790B58142649A3FF00605696 /* LoginViewController.swift in Sources */,
 				790F22982649C656000B2B59 /* WelcomeViewController.swift in Sources */,
+				7948ABE2264B32AB006340EB /* ImageButton.swift in Sources */,
 				7948A8CD2649BE2300FDF493 /* ExploreObjectView.swift in Sources */,
 				793551E126485CA5001D03A7 /* Style.swift in Sources */,
 			);
