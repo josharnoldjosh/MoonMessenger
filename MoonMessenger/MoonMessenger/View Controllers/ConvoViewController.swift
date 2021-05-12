@@ -166,6 +166,7 @@ final class ConvoList : UIView, UICollectionViewDelegate {
         if snap.sectionIdentifiers.count == 0 {
             snap.appendSections([0])
         }
+        guard snap.itemIdentifiers.count < 2 else {return}
         snap.appendItems([
             ConvoItem(id: UUID(), username: "Naruto", image: UIImage(named: "Naruto") ?? UIImage(), lastMessageDate: Date(), lastMessageText: "Hey! How's it going?"),
             ConvoItem(id: UUID(), username: "Kakashi", image: UIImage(named: "Kakashi") ?? UIImage(), lastMessageDate: Date(), lastMessageText: "Hello world. This is a message..."),
@@ -183,7 +184,18 @@ final class ConvoList : UIView, UICollectionViewDelegate {
         return layout
     }
     
+    
+    //TODO: Add touch down animation
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        
+    }
+    
+    //TODO: UNDO touch down animation
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let convo = data.snapshot().itemIdentifiers[indexPath.row]
         self.action(convo)
     }
@@ -227,7 +239,9 @@ final class ConvoViewController : UIViewController {
         view.addSubview(logo)
         
         convoList = ConvoList() { convo in
-            print("Did Tap convo")
+            let vc = MessagesViewController(convo: convo)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
         }
         view.addSubview(convoList)
         

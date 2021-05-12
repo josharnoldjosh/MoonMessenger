@@ -19,6 +19,8 @@
 		792BC6BF264856B50016E411 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792BC6BE264856B50016E411 /* SplashViewController.swift */; };
 		792BC6C4264856B60016E411 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 792BC6C3264856B60016E411 /* Assets.xcassets */; };
 		792BC6C7264856B60016E411 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 792BC6C5264856B60016E411 /* LaunchScreen.storyboard */; };
+		7931239E264C4C4D00B514BB /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7931239D264C4C4D00B514BB /* MessagesViewController.swift */; };
+		793123A0264C515D00B514BB /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7931239F264C515D00B514BB /* BackButton.swift */; };
 		793551DE26485971001D03A7 /* Preview in Frameworks */ = {isa = PBXBuildFile; productRef = 793551DD26485971001D03A7 /* Preview */; };
 		793551E126485CA5001D03A7 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793551E026485CA5001D03A7 /* Style.swift */; };
 		793551E426485D98001D03A7 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793551E326485D98001D03A7 /* IntroViewController.swift */; };
@@ -45,6 +47,8 @@
 		792BC6C3264856B60016E411 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		792BC6C6264856B60016E411 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		792BC6C8264856B60016E411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7931239D264C4C4D00B514BB /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		7931239F264C515D00B514BB /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		793551E026485CA5001D03A7 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		793551E326485D98001D03A7 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		793551E6264861CB001D03A7 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 				792862E62649842E00BD5172 /* ShinyButton.swift */,
 				790B580D264992F200605696 /* TextButton.swift */,
 				7948ABE1264B32AB006340EB /* ImageButton.swift */,
+				7931239F264C515D00B514BB /* BackButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 				790B58132649A3FF00605696 /* LoginViewController.swift */,
 				790F22972649C656000B2B59 /* WelcomeViewController.swift */,
 				7948ABDF264B31B3006340EB /* ConvoViewController.swift */,
+				7931239D264C4C4D00B514BB /* MessagesViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -286,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7931239E264C4C4D00B514BB /* MessagesViewController.swift in Sources */,
 				793551E426485D98001D03A7 /* IntroViewController.swift in Sources */,
 				792BC6BF264856B50016E411 /* SplashViewController.swift in Sources */,
 				790B5810264996B300605696 /* SignupViewController.swift in Sources */,
@@ -293,6 +300,7 @@
 				792BC6BB264856B50016E411 /* AppDelegate.swift in Sources */,
 				792862E72649842E00BD5172 /* ShinyButton.swift in Sources */,
 				790B581226499B7C00605696 /* TextField.swift in Sources */,
+				793123A0264C515D00B514BB /* BackButton.swift in Sources */,
 				7948ABE0264B31B3006340EB /* ConvoViewController.swift in Sources */,
 				792BC6BD264856B50016E411 /* SceneDelegate.swift in Sources */,
 				790B58142649A3FF00605696 /* LoginViewController.swift in Sources */,
