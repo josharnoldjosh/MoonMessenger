@@ -45,6 +45,15 @@ class MessagesViewController : UIViewController {
         view.addTapGesture { tap in
             self.view.endEditing(true)
         }
+        
+        chatView.addMessages([
+            Message(text: "Hey!", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
+            Message(text: "How's it going?", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
+            Message(text: "Great, hby?", origin: .incoming, date: Date(), delivered: true, seen: true, error: false),
+            Message(text: "What's new?", origin: .incoming, date: Date(), delivered: true, seen: true, error: false),
+            Message(text: "Maecenas malesuada nibh id ullamcorper rhoncus. Donec scelerisque tortor eget vulputate pharetra. Fusce semper est lectus, eu laoreet massa interdum nec. Vestibulum convallis fermentum lectus non imperdiet. Aenean sollicitudin congue orci, vel viverra nulla interdum eu. Nullam at turpis at lacus consectetur congue. Nunc in mauris consequat lacus luctus tincidunt eget vel mauris. Sed in tempor sem. Vivamus tristique in nibh sed pellentesque. Curabitur finibus, neque nec ullamcorper hendrerit, mauris nisl dignissim magna, a finibus turpis ipsum vel leo. Integer id lacus quis dolor consequat venenatis.", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
+        ], animate: false)
+        chatView.alpha = 0
     }
     
     func setupUI() {
@@ -81,6 +90,11 @@ class MessagesViewController : UIViewController {
                 Message(text: text, origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
             ])
         })
+        input.textfield.onEditingEnded {
+            self.chatView.scrollToBottom()
+        }.onEditingBegan {
+            self.chatView.scrollToBottom()
+        }
         view.addSubview(input)
     }
     
@@ -105,8 +119,7 @@ class MessagesViewController : UIViewController {
         chatView.snp.makeConstraints { make in
             make.top.equalTo(username.snp.bottom).offset(20)
             make.left.right.equalTo(self.view.safeAreaLayoutGuide)
-            make.bottom.equalTo(self.input.snp.top).offset(-5)
-//            make.bottom.equalToSuperview().offset(-60)
+            make.bottom.equalTo(self.input.snp.top).offset(-10)
         }
         
         input.snp.makeConstraints { make in
@@ -118,12 +131,10 @@ class MessagesViewController : UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        chatView.addMessages([
-            Message(text: "Hey!", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
-            Message(text: "How's it going?", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
-            Message(text: "Great, hby?", origin: .incoming, date: Date(), delivered: true, seen: true, error: false),
-            Message(text: "What's new?", origin: .incoming, date: Date(), delivered: true, seen: true, error: false),
-        ])
+        
+        UIView.animate(withDuration: 0.5) {
+            self.chatView.alpha = 1
+        }
     }
 }
 
