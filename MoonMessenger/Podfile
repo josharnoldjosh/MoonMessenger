@@ -12,5 +12,7 @@ target 'MoonMessenger' do
   pod 'Parse'
   pod 'lottie-ios'
   pod 'PopBounceButton'
+  pod 'IHKeyboardAvoiding'
+
 
 end

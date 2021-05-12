@@ -30,6 +30,22 @@
 		7948A8D62649C2E400FDF493 /* Moon_Base_Color.png in Resources */ = {isa = PBXBuildFile; fileRef = 7948A8D42649C2E400FDF493 /* Moon_Base_Color.png */; };
 		7948ABE0264B31B3006340EB /* ConvoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948ABDF264B31B3006340EB /* ConvoViewController.swift */; };
 		7948ABE2264B32AB006340EB /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948ABE1264B32AB006340EB /* ImageButton.swift */; };
+		795035E8264C55F300FF0CD9 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035D9264C55F200FF0CD9 /* Appearance.swift */; };
+		795035E9264C55F300FF0CD9 /* BubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035DA264C55F200FF0CD9 /* BubbleCell.swift */; };
+		795035EA264C55F300FF0CD9 /* DateStampBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035DB264C55F200FF0CD9 /* DateStampBuilder.swift */; };
+		795035EB264C55F300FF0CD9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035DC264C55F200FF0CD9 /* Message.swift */; };
+		795035EC264C55F300FF0CD9 /* ResizableGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035DD264C55F200FF0CD9 /* ResizableGradientView.swift */; };
+		795035ED264C55F300FF0CD9 /* AvatarBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035DE264C55F200FF0CD9 /* AvatarBadge.swift */; };
+		795035EE264C55F300FF0CD9 /* OutgoingBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035DF264C55F200FF0CD9 /* OutgoingBubbleCell.swift */; };
+		795035EF264C55F300FF0CD9 /* DateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035E0264C55F200FF0CD9 /* DateHeader.swift */; };
+		795035F0264C55F300FF0CD9 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035E1264C55F200FF0CD9 /* ChatView.swift */; };
+		795035F1264C55F300FF0CD9 /* IncomingBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035E2264C55F200FF0CD9 /* IncomingBubbleCell.swift */; };
+		795035F2264C55F300FF0CD9 /* DataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035E3264C55F200FF0CD9 /* DataBuilder.swift */; };
+		795035F3264C55F300FF0CD9 /* SeenBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035E4264C55F200FF0CD9 /* SeenBadge.swift */; };
+		795035F4264C55F300FF0CD9 /* AvatarBadgeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035E5264C55F300FF0CD9 /* AvatarBadgeBuilder.swift */; };
+		795035F5264C55F300FF0CD9 /* SeenBadgeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035E6264C55F300FF0CD9 /* SeenBadgeBuilder.swift */; };
+		795035F6264C55F300FF0CD9 /* EmptySeen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035E7264C55F300FF0CD9 /* EmptySeen.swift */; };
+		795035F8264C5B9500FF0CD9 /* ChatInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035F7264C5B9500FF0CD9 /* ChatInputTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +73,22 @@
 		7948A8D42649C2E400FDF493 /* Moon_Base_Color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Moon_Base_Color.png; sourceTree = "<group>"; };
 		7948ABDF264B31B3006340EB /* ConvoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoViewController.swift; sourceTree = "<group>"; };
 		7948ABE1264B32AB006340EB /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
+		795035D9264C55F200FF0CD9 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		795035DA264C55F200FF0CD9 /* BubbleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleCell.swift; sourceTree = "<group>"; };
+		795035DB264C55F200FF0CD9 /* DateStampBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateStampBuilder.swift; sourceTree = "<group>"; };
+		795035DC264C55F200FF0CD9 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		795035DD264C55F200FF0CD9 /* ResizableGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizableGradientView.swift; sourceTree = "<group>"; };
+		795035DE264C55F200FF0CD9 /* AvatarBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarBadge.swift; sourceTree = "<group>"; };
+		795035DF264C55F200FF0CD9 /* OutgoingBubbleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingBubbleCell.swift; sourceTree = "<group>"; };
+		795035E0264C55F200FF0CD9 /* DateHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHeader.swift; sourceTree = "<group>"; };
+		795035E1264C55F200FF0CD9 /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		795035E2264C55F200FF0CD9 /* IncomingBubbleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingBubbleCell.swift; sourceTree = "<group>"; };
+		795035E3264C55F200FF0CD9 /* DataBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataBuilder.swift; sourceTree = "<group>"; };
+		795035E4264C55F200FF0CD9 /* SeenBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeenBadge.swift; sourceTree = "<group>"; };
+		795035E5264C55F300FF0CD9 /* AvatarBadgeBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarBadgeBuilder.swift; sourceTree = "<group>"; };
+		795035E6264C55F300FF0CD9 /* SeenBadgeBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeenBadgeBuilder.swift; sourceTree = "<group>"; };
+		795035E7264C55F300FF0CD9 /* EmptySeen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySeen.swift; sourceTree = "<group>"; };
+		795035F7264C5B9500FF0CD9 /* ChatInputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputTextField.swift; sourceTree = "<group>"; };
 		8DC0316EF88765DAAC3CAE22 /* Pods-MoonMessenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoonMessenger.release.xcconfig"; path = "Target Support Files/Pods-MoonMessenger/Pods-MoonMessenger.release.xcconfig"; sourceTree = "<group>"; };
 		B8562D25EE9919033B17DE4C /* Pods-MoonMessenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoonMessenger.debug.xcconfig"; path = "Target Support Files/Pods-MoonMessenger/Pods-MoonMessenger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +115,7 @@
 				790B580D264992F200605696 /* TextButton.swift */,
 				7948ABE1264B32AB006340EB /* ImageButton.swift */,
 				7931239F264C515D00B514BB /* BackButton.swift */,
+				795035F7264C5B9500FF0CD9 /* ChatInputTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -110,6 +143,7 @@
 			children = (
 				792BC6BA264856B50016E411 /* AppDelegate.swift */,
 				792BC6BC264856B50016E411 /* SceneDelegate.swift */,
+				795035D8264C55E700FF0CD9 /* Messaging */,
 				7948A8D22649C04E00FDF493 /* Moon */,
 				793551E226485CA8001D03A7 /* Global */,
 				793551DF26485C7B001D03A7 /* View Controllers */,
@@ -151,6 +185,28 @@
 				7948A8D32649C2E400FDF493 /* moon.dae */,
 			);
 			path = Moon;
+			sourceTree = "<group>";
+		};
+		795035D8264C55E700FF0CD9 /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				795035D9264C55F200FF0CD9 /* Appearance.swift */,
+				795035DE264C55F200FF0CD9 /* AvatarBadge.swift */,
+				795035E5264C55F300FF0CD9 /* AvatarBadgeBuilder.swift */,
+				795035DA264C55F200FF0CD9 /* BubbleCell.swift */,
+				795035E1264C55F200FF0CD9 /* ChatView.swift */,
+				795035E3264C55F200FF0CD9 /* DataBuilder.swift */,
+				795035E0264C55F200FF0CD9 /* DateHeader.swift */,
+				795035DB264C55F200FF0CD9 /* DateStampBuilder.swift */,
+				795035E7264C55F300FF0CD9 /* EmptySeen.swift */,
+				795035E2264C55F200FF0CD9 /* IncomingBubbleCell.swift */,
+				795035DC264C55F200FF0CD9 /* Message.swift */,
+				795035DF264C55F200FF0CD9 /* OutgoingBubbleCell.swift */,
+				795035DD264C55F200FF0CD9 /* ResizableGradientView.swift */,
+				795035E4264C55F200FF0CD9 /* SeenBadge.swift */,
+				795035E6264C55F300FF0CD9 /* SeenBadgeBuilder.swift */,
+			);
+			path = Messaging;
 			sourceTree = "<group>";
 		};
 		7ACBB3ED9036106568462164 /* Pods */ = {
@@ -292,20 +348,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				795035F2264C55F300FF0CD9 /* DataBuilder.swift in Sources */,
 				7931239E264C4C4D00B514BB /* MessagesViewController.swift in Sources */,
+				795035F4264C55F300FF0CD9 /* AvatarBadgeBuilder.swift in Sources */,
 				793551E426485D98001D03A7 /* IntroViewController.swift in Sources */,
+				795035EE264C55F300FF0CD9 /* OutgoingBubbleCell.swift in Sources */,
+				795035ED264C55F300FF0CD9 /* AvatarBadge.swift in Sources */,
 				792BC6BF264856B50016E411 /* SplashViewController.swift in Sources */,
+				795035F1264C55F300FF0CD9 /* IncomingBubbleCell.swift in Sources */,
+				795035EA264C55F300FF0CD9 /* DateStampBuilder.swift in Sources */,
 				790B5810264996B300605696 /* SignupViewController.swift in Sources */,
+				795035F5264C55F300FF0CD9 /* SeenBadgeBuilder.swift in Sources */,
 				790B580E264992F200605696 /* TextButton.swift in Sources */,
+				795035F8264C5B9500FF0CD9 /* ChatInputTextField.swift in Sources */,
+				795035E8264C55F300FF0CD9 /* Appearance.swift in Sources */,
 				792BC6BB264856B50016E411 /* AppDelegate.swift in Sources */,
+				795035F3264C55F300FF0CD9 /* SeenBadge.swift in Sources */,
 				792862E72649842E00BD5172 /* ShinyButton.swift in Sources */,
 				790B581226499B7C00605696 /* TextField.swift in Sources */,
 				793123A0264C515D00B514BB /* BackButton.swift in Sources */,
 				7948ABE0264B31B3006340EB /* ConvoViewController.swift in Sources */,
 				792BC6BD264856B50016E411 /* SceneDelegate.swift in Sources */,
 				790B58142649A3FF00605696 /* LoginViewController.swift in Sources */,
+				795035E9264C55F300FF0CD9 /* BubbleCell.swift in Sources */,
+				795035F0264C55F300FF0CD9 /* ChatView.swift in Sources */,
 				790F22982649C656000B2B59 /* WelcomeViewController.swift in Sources */,
+				795035EF264C55F300FF0CD9 /* DateHeader.swift in Sources */,
+				795035F6264C55F300FF0CD9 /* EmptySeen.swift in Sources */,
+				795035EC264C55F300FF0CD9 /* ResizableGradientView.swift in Sources */,
 				7948ABE2264B32AB006340EB /* ImageButton.swift in Sources */,
+				795035EB264C55F300FF0CD9 /* Message.swift in Sources */,
 				7948A8CD2649BE2300FDF493 /* ExploreObjectView.swift in Sources */,
 				793551E126485CA5001D03A7 /* Style.swift in Sources */,
 			);

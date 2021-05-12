@@ -25,6 +25,10 @@ extension UIColor {
     static var darkShadow:UIColor {
         return UIColor(red: 0.10, green: 0.11, blue: 0.13, alpha: 1.00)
     }
+    
+    static var lightShadow:UIColor {
+        return UIColor(red: 0.24, green: 0.27, blue: 0.33, alpha: 1.00)
+    }
 }
 
 

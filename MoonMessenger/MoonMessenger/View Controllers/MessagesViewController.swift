@@ -11,6 +11,7 @@ import SwiftUI
 import Preview
 import Closures
 import PopBounceButton
+import IHKeyboardAvoiding
 
 
 class MessagesViewController : UIViewController {
@@ -19,6 +20,9 @@ class MessagesViewController : UIViewController {
     var username:UILabel = UILabel.body()
     var back:BackButton!
     private var convo:ConvoItem!
+    
+    private var chatView:ChatView!
+    private var input:ChatInputTextField!
     
     init(convo: ConvoItem) {
         super.init(nibName: nil, bundle: nil)
@@ -36,6 +40,11 @@ class MessagesViewController : UIViewController {
         view.backgroundColor = .background
         setupUI()
         snap()
+        
+        KeyboardAvoiding.avoidingView = self.view
+        view.addTapGesture { tap in
+            self.view.endEditing(true)
+        }
     }
     
     func setupUI() {
@@ -47,16 +56,32 @@ class MessagesViewController : UIViewController {
         profilePicture.contentMode = .scaleAspectFill
         view.addSubview(profilePicture)
         
-        username.text = convo.username
         username.font = .caption
+        username.text = convo.username
         view.addSubview(username)
         
         back = BackButton(tap: {
             self.hero.modalAnimationType = .slide(direction: .right)
             self.hero.dismissViewController()
-//            self.dismiss(animated: true, completion: nil)
         })
         view.addSubview(back)
+        
+        var style = ChatStyle()
+        style.seen = SeenStyle(enableSeen: false, scale: 0, avatorImage: UIImage(), tintColor: .white)
+        style.outgoing.gradient.colors = [.primary, .secondary]
+        style.incoming.gradient.colors = [.lightShadow]
+        style.incoming.label.textColor = .white
+        style.avatar.avatorImage = convo.image
+        chatView = ChatView(style: style, frame: .zero)
+        chatView.backgroundColor = .background
+        view.addSubview(chatView)
+        
+        input = ChatInputTextField(send: { text in 
+            self.chatView.addMessages([
+                Message(text: text, origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
+            ])
+        })
+        view.addSubview(input)
     }
     
     func snap() {
@@ -76,20 +101,29 @@ class MessagesViewController : UIViewController {
             make.left.top.equalTo(self.view.safeAreaLayoutGuide).inset(10)
             make.height.width.equalTo(40)
         }
+        
+        chatView.snp.makeConstraints { make in
+            make.top.equalTo(username.snp.bottom).offset(20)
+            make.left.right.equalTo(self.view.safeAreaLayoutGuide)
+            make.bottom.equalTo(self.input.snp.top).offset(-5)
+//            make.bottom.equalToSuperview().offset(-60)
+        }
+        
+        input.snp.makeConstraints { make in
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.left.right.equalToSuperview().inset(40)
+            make.height.equalTo(45)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-    }
-    
-    func goToHome() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let vc = ConvoViewController()
-            vc.modalPresentationStyle = .fullScreen
-            vc.heroModalAnimationType = .zoomOut
-            self.present(vc, animated: true, completion: nil)
-        }
+        chatView.addMessages([
+            Message(text: "Hey!", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
+            Message(text: "How's it going?", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
+            Message(text: "Great, hby?", origin: .incoming, date: Date(), delivered: true, seen: true, error: false),
+            Message(text: "What's new?", origin: .incoming, date: Date(), delivered: true, seen: true, error: false),
+        ])
     }
 }
 
