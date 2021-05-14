@@ -44,13 +44,14 @@ class TextField : UIView {
         }
         
         textfield.snp.makeConstraints { make in
-            make.top.bottom.right.equalToSuperview()
+            make.top.bottom.equalToSuperview()
             make.left.equalTo(self.imageView.snp.right).offset(10)
+            make.right.equalToSuperview().inset(40)
         }
         
         line.snp.makeConstraints { make in
-            make.top.equalTo(self.imageView.snp.bottom).offset(30)
-            make.width.equalTo(100)
+            make.top.equalTo(self.imageView.snp.bottom).offset(25)
+            make.width.equalTo(140)
             make.centerX.equalToSuperview()
             make.height.equalTo(2)
         }
@@ -75,6 +76,13 @@ class TextField : UIView {
         textfield.autocapitalizationType = .none
     }
     
+    func key() {
+        textfield.keyboardType = .default
+        textfield.autocorrectionType = .no
+        textfield.autocapitalizationType = .none
+        textfield.textAlignment = .center
+    }
+    
     func hideLine() {
         line.alpha = 0
     }
@@ -86,12 +94,13 @@ struct TextFieldContentView_Previews : PreviewProvider {
     static var previews : some View {
         Preview.make {
             let button = TextField(imageName: "UserIcon", placeholder: "Name")
+            button.key()
             let vc = UIViewController()
             vc.view.backgroundColor = .background
             vc.view.addSubview(button)
             button.snp.makeConstraints { make in
                 make.center.equalToSuperview()
-                make.width.equalToSuperview().inset(20)
+                make.width.equalToSuperview()
                 make.height.equalTo(40)
             }
             return vc

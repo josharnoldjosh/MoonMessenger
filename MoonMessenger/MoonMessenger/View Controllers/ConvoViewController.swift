@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 import Preview
 import SnapKit
+import Firebase
 
 
 struct ConvoItem : Hashable {
@@ -55,11 +56,13 @@ final class ConvoCell : UICollectionViewCell {
         text = UILabel()
         text.textColor = .white
         text.alpha = 0.5
+        text.font = .mini
         contentView.addSubview(text)
         
         time = UILabel()
         time.textColor = .white
         time.alpha = 0.25
+        time.font = .mini
         contentView.addSubview(time)
         
         line = UIView()
@@ -81,7 +84,7 @@ final class ConvoCell : UICollectionViewCell {
         }
         
         text.snp.makeConstraints { make in
-            make.top.equalTo(self.username.snp.bottom).offset(5)
+            make.top.equalTo(self.username.snp.bottom)
             make.left.equalTo(imageView.snp.right).offset(inset)
             make.height.lessThanOrEqualToSuperview()
             make.right.equalToSuperview().inset(30)
@@ -107,7 +110,7 @@ final class ConvoCell : UICollectionViewCell {
         imageView.image = item.image
         username.attributedText = NSAttributedString(
             string: item.username,
-            attributes: [.kern : 3, .font : UIFont.body]
+            attributes: [.kern : 2, .font : UIFont.mini]
         )
         text.attributedText = NSAttributedString(
             string: item.lastMessageText,
@@ -115,7 +118,7 @@ final class ConvoCell : UICollectionViewCell {
         )
         time.attributedText = NSAttributedString(
             string: "5m",
-            attributes: [.font : UIFont.caption]
+            attributes: [.font : UIFont.mini]
         )
     }
     
@@ -128,7 +131,7 @@ final class ConvoCell : UICollectionViewCell {
 
 final class ConvoList : UIView, UICollectionViewDelegate {
             
-    static let rowHeight:CGFloat = 90
+    static let rowHeight:CGFloat = 75
     private var collectionView:UICollectionView!
     private var data:UICollectionViewDiffableDataSource<Int, ConvoItem>!
     private var action: (_ convo:ConvoItem) -> ()?
@@ -187,12 +190,16 @@ final class ConvoList : UIView, UICollectionViewDelegate {
     
     //TODO: Add touch down animation
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        
+        UIView.animate(withDuration: 0.25) {
+            collectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        }
     }
     
     //TODO: UNDO touch down animation
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        
+        UIView.animate(withDuration: 0.25) {
+            collectionView.cellForItem(at: indexPath)?.transform = .identity
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -227,11 +234,21 @@ final class ConvoViewController : UIViewController {
         view.backgroundColor = .background
         setupUI()
         snap()
+        
+        let _ = Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user == nil {
+                let vc = IntroViewController()
+                vc.modalPresentationStyle = .fullScreen
+                vc.heroModalAnimationType = .zoomOut
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        convoList.refresh()
+        
+        convoList.refresh()                
     }
     
     func setupUI() {
@@ -246,7 +263,10 @@ final class ConvoViewController : UIViewController {
         view.addSubview(convoList)
         
         newConvo = ImageButton(imageNames: ["ButtonCircleA", "ButtonCircleC"], onTap: {
-            
+            let vc = JoinChannelViewController()
+            vc.modalPresentationStyle = .fullScreen
+            vc.heroModalAnimationType = .slide(direction: .left)
+            self.present(vc, animated: true, completion: nil)
         })
         view.addSubview(newConvo)
         

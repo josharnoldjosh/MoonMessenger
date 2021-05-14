@@ -16,11 +16,13 @@ struct ElementKind  {
 }
 
 
-final class ChatView : UIView {
+final class ChatView : UIView, UIScrollViewDelegate {
     
     var style:ChatStyle!
     var collectionView:UICollectionView!
     var data:UICollectionViewDiffableDataSource<Section, Message>!
+    
+    var didScroll: ((_ offset:CGPoint) -> ())?
         
     init(style:ChatStyle = ChatStyle(), frame:CGRect = .zero) {
         super.init(frame: frame)
@@ -192,7 +194,7 @@ final class ChatView : UIView {
             return nil
         }
     }
-}
+    }
 
 
 /**
@@ -204,6 +206,7 @@ extension ChatView : UICollectionViewDelegate {
             guard let cell = cell as? BubbleCell else {continue}
             cell.updateGradient()
         }
+        self.didScroll?(self.collectionView.contentOffset)
     }        
 }
 

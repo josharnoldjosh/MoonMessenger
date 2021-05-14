@@ -26,6 +26,7 @@ class ImageButton : UIView {
         }
         guard imageNames.count >= 2 else {return}
         button.setImage(UIImage(named: imageNames.first ?? "") ?? UIImage(), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
         button.setImage(UIImage(named: imageNames.last ?? "") ?? UIImage(), for: .highlighted)
         button.onTap {
             onTap()

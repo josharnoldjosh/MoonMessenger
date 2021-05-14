@@ -14,15 +14,42 @@ import PopBounceButton
 import IHKeyboardAvoiding
 
 
+class InputViewWrapper : UIView {
+    
+    
+    var input:ChatInputTextField!
+    
+    init(success: @escaping (_ send:String) -> ()) {
+        super.init(frame: .zero)
+        
+        input = ChatInputTextField(send: { text in
+            success(text)
+        })
+        
+        addSubview(input)
+                
+        
+        input.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(45)
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
 class MessagesViewController : UIViewController {
     
-    var profilePicture:UIImageView!
+    var profilePicture:PopBounceButton!
     var username:UILabel = UILabel.body()
     var back:BackButton!
     private var convo:ConvoItem!
     
     private var chatView:ChatView!
-    private var input:ChatInputTextField!
+    private var input:InputViewWrapper!
     
     init(convo: ConvoItem) {
         super.init(nibName: nil, bundle: nil)
@@ -41,7 +68,7 @@ class MessagesViewController : UIViewController {
         setupUI()
         snap()
         
-        KeyboardAvoiding.avoidingView = self.view
+        KeyboardAvoiding.avoidingView = self.input
         view.addTapGesture { tap in
             self.view.endEditing(true)
         }
@@ -51,18 +78,23 @@ class MessagesViewController : UIViewController {
             Message(text: "How's it going?", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
             Message(text: "Great, hby?", origin: .incoming, date: Date(), delivered: true, seen: true, error: false),
             Message(text: "What's new?", origin: .incoming, date: Date(), delivered: true, seen: true, error: false),
+            Message(text: "Maecenas malesuada nibh id ullamcorper rhoncus. Donec scelerisque tortor eget vulputate pharetra. Fusce semper est lectus, eu laoreet massa interdum nec. Vestibulum convallis fermentum lectus non imperdiet.", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
+            Message(text: "Maecenas malesuada nibh id ullamcorper rhoncus. Donec scelerisque tortor eget vulputate pharetra. Fusce semper est lectus, eu laoreet massa interdum nec. Vestibulum convallis fermentum lectus non imperdiet. Aenean sollicitudin congue orci, vel viverra nulla interdum eu. Nullam at turpis at lacus consectetur congue. Nunc in mauris consequat lacus luctus tincidunt eget vel mauris. Sed in tempor sem. Vivamus tristique in nibh sed pellentesque. Curabitur finibus, neque nec ullamcorper hendrerit, mauris nisl dignissim magna, a finibus turpis ipsum vel leo. Integer id lacus quis dolor consequat venenatis.", origin: .incoming, date: Date(), delivered: true, seen: true, error: false),
             Message(text: "Maecenas malesuada nibh id ullamcorper rhoncus. Donec scelerisque tortor eget vulputate pharetra. Fusce semper est lectus, eu laoreet massa interdum nec. Vestibulum convallis fermentum lectus non imperdiet. Aenean sollicitudin congue orci, vel viverra nulla interdum eu. Nullam at turpis at lacus consectetur congue. Nunc in mauris consequat lacus luctus tincidunt eget vel mauris. Sed in tempor sem. Vivamus tristique in nibh sed pellentesque. Curabitur finibus, neque nec ullamcorper hendrerit, mauris nisl dignissim magna, a finibus turpis ipsum vel leo. Integer id lacus quis dolor consequat venenatis.", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
         ], animate: false)
         chatView.alpha = 0
     }
     
     func setupUI() {
-        profilePicture = UIImageView()
-        profilePicture.image = convo.image
+        profilePicture = PopBounceButton()
+        profilePicture.setImage(convo.image, for: .normal)
         profilePicture.backgroundColor = .darkShadow
-        profilePicture.layer.cornerRadius = 60/2
+        profilePicture.layer.cornerRadius = 50/2
         profilePicture.layer.masksToBounds = true
         profilePicture.contentMode = .scaleAspectFill
+        profilePicture.addAction(UIAction(handler: { tap in
+            self.editChannelDetails()
+        }), for: .touchUpInside)
         view.addSubview(profilePicture)
         
         username.font = .caption
@@ -81,28 +113,50 @@ class MessagesViewController : UIViewController {
         style.incoming.gradient.colors = [.lightShadow]
         style.incoming.label.textColor = .white
         style.avatar.avatorImage = convo.image
+        style.outgoing.label.font = .caption
+        style.incoming.label.font = .caption
         chatView = ChatView(style: style, frame: .zero)
-        chatView.backgroundColor = .background
-        view.addSubview(chatView)
         
-        input = ChatInputTextField(send: { text in 
+        chatView.backgroundColor = .background
+        chatView.collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 70, right: 0)
+        view.insertSubview(chatView, at: 0)
+    
+        chatView.didScroll = { offset in
+            if offset.y <= -130 {
+                UIView.animate(withDuration: 0.2) {
+                    self.username.alpha = 1
+                }
+            }else{
+                UIView.animate(withDuration: 0.2) {
+                    self.username.alpha = 0
+                }
+            }
+        }
+    
+        input = InputViewWrapper(success: { text in
             self.chatView.addMessages([
                 Message(text: text, origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
             ])
         })
-        input.textfield.onEditingEnded {
+        input.input.textfield.onEditingEnded {
             self.chatView.scrollToBottom()
+            UIView.animateKeyframes(withDuration: 0.5, delay: 0.12, options: []) {
+                self.chatView.collectionView.contentInset.bottom -= 300
+            } completion: { done in
+                
+            }
         }.onEditingBegan {
+            self.chatView.collectionView.contentInset.bottom += 300
             self.chatView.scrollToBottom()
         }
-        view.addSubview(input)
+        view.addSubview(input)        
     }
     
     func snap() {
         profilePicture.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(60)
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(30)
+            make.width.height.equalTo(50)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
         }
         
         username.snp.makeConstraints { make in
@@ -117,24 +171,28 @@ class MessagesViewController : UIViewController {
         }
         
         chatView.snp.makeConstraints { make in
-            make.top.equalTo(username.snp.bottom).offset(20)
-            make.left.right.equalTo(self.view.safeAreaLayoutGuide)
-            make.bottom.equalTo(self.input.snp.top).offset(-10)
+//            make.edges.equalTo(self.view.safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
         }
         
         input.snp.makeConstraints { make in
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
             make.left.right.equalToSuperview().inset(40)
-            make.height.equalTo(45)
+            make.height.equalTo(55)
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.5, delay: 0.15, options: []) {
             self.chatView.alpha = 1
+        } completion: { done in
+            
         }
+    }
+    
+    func editChannelDetails() {
+        
     }
 }
 

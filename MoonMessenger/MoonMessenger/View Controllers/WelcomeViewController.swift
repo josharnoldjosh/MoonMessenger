@@ -33,7 +33,7 @@ class WelcomeViewController : UIViewController {
         titleLabel.transform = CGAffineTransform(translationX: 0, y: -20)
         view.addSubview(titleLabel)
         
-        bodyLabel.text = "Decentralized messaging."
+        bodyLabel.text = "Ephemeral messaging."
         bodyLabel.alpha = 0
         bodyLabel.transform = CGAffineTransform(translationX: 0, y: -20)
         view.addSubview(bodyLabel)
@@ -75,7 +75,7 @@ class WelcomeViewController : UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIView.animate(withDuration: 2) {
+        UIView.animate(withDuration: 2.0) {
             self.titleLabel.alpha = 1
             self.bodyLabel.alpha = 0.5
             self.bodyLabel.transform = .identity

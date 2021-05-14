@@ -44,12 +44,12 @@ class IntroViewController: UIViewController {
         titleLabel.hero.id = "title"
         view.addSubview(titleLabel)
         
-        bodyLabel.text = "Decentralized messaging."
+        bodyLabel.text = "Ephemeral messaging."
         bodyLabel.alpha = 0
         view.addSubview(bodyLabel)
         
-        signup = ShinyButton("Signup") {
-            self.signupUser()
+        signup = ShinyButton("Continue") {
+            self.connectUser()
         }
         signup.hero.id = "signup"
         signup.alpha = 0
@@ -90,14 +90,14 @@ class IntroViewController: UIViewController {
             make.width.equalTo(170)
             make.height.equalTo(46)
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(self.login.snp.top).offset(-5)
+            make.bottom.equalTo(self.login.snp.top).offset(-40)
         }
         
         login.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.height.lessThanOrEqualToSuperview()
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(80)
+            make.bottom.equalToSuperview().inset(0)
         }
         
         signup.transform = CGAffineTransform(translationX: 0, y: 20)
@@ -115,10 +115,19 @@ class IntroViewController: UIViewController {
         UIView.animateKeyframes(withDuration: 1.0, delay: 0.5, options: []) {
             self.signup.alpha = 1
             self.signup.transform = .identity
-            self.login.alpha = 0.5
+//            self.login.alpha = 0.5
             self.login.transform = .identity
         } completion: { done in
             
+        }
+    }
+    
+    func connectUser() {
+        fadeOut()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let vc = ConnectViewController()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
         }
     }
     

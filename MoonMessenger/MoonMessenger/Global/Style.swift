@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SwiftUI
+import Combine
 
 
 extension UIColor {
@@ -39,7 +41,11 @@ extension UIFont {
     
     static var caption:UIFont {
         return UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont(name: "AvenirNext-Medium", size: 14) ?? UIFont.systemFont(ofSize: UIFont.labelFontSize))
-    }        
+    }
+    
+    static var mini:UIFont {
+        return UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont(name: "AvenirNext-Medium", size: 11) ?? UIFont.systemFont(ofSize: UIFont.labelFontSize))
+    }
 }
 
 

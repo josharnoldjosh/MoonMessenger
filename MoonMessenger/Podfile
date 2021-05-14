@@ -13,6 +13,11 @@ target 'MoonMessenger' do
   pod 'lottie-ios'
   pod 'PopBounceButton'
   pod 'IHKeyboardAvoiding'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+#  pod 'Firebase/Firestore'
+  pod 'JGProgressHUD'
+  pod 'Firebase/Database'
 
 
 end

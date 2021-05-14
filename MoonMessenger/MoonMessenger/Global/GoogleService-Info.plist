@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>119359134159-3bp6koc5vv306lpko40gv761d2c5eu5k.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.119359134159-3bp6koc5vv306lpko40gv761d2c5eu5k</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCRU7qRP_PBG4UIy5f-vWYWJvXRBu5JMMA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>119359134159</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.dev.neptune</string>
+	<key>PROJECT_ID</key>
+	<string>neptune-8d953</string>
+	<key>STORAGE_BUCKET</key>
+	<string>neptune-8d953.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:119359134159:ios:e11978a4c786d938cd5aba</string>
+</dict>
+</plist>
