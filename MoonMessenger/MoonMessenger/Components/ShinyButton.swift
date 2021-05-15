@@ -11,13 +11,14 @@ import SwiftUI
 import SnapKit
 import Closures
 import Preview
+import PopBounceButton
 
 
-class ShinyButton : UIView {
+class ShinyButton : PopBounceButton {
     
     let lightGradient = CAGradientLayer()
     let gradient = CAGradientLayer()
-    let button = UIButton()
+    let button = UILabel.body()
     
     init(_ title:String, onTap: @escaping () -> Void) {
         super.init(frame: .zero)
@@ -37,29 +38,19 @@ class ShinyButton : UIView {
         
         // Button
         addSubview(button)
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(UIColor(white: 1, alpha: 0.8), for: .normal)
-        button.titleLabel?.font = .caption
+        button.text = title
+        button.font = .caption
+        button.textColor = UIColor(white: 1, alpha: 1)
         button.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        // Start touch
-        button.on(.touchDown) { a, b in
-            self.animateDown()
-        }
+        self.layer.masksToBounds = true
                 
-        // Succeed touch
-        button.on(.touchUpInside) { a, b in
-            self.animateUp()
+        self.addAction(UIAction(handler: { tap in
             Impact.button()
             onTap()
-        }
-        
-        // Cancel touch
-        button.on([.touchCancel, .touchUpOutside, .touchDragOutside, .touchDragExit]) { a, b in
-            self.animateUp()
-        }
+        }), for: .touchUpInside)        
     }
     
     required init?(coder: NSCoder) {
@@ -67,40 +58,12 @@ class ShinyButton : UIView {
     }
     
     override func layoutSubviews() {
-        let cornerRadius = frame.height / 2
+        let cornerRadius = (self.frame.height) / 2
         layer.cornerRadius = cornerRadius
         gradient.cornerRadius = cornerRadius
         lightGradient.cornerRadius = cornerRadius
         gradient.frame = bounds
         lightGradient.frame = bounds
-    }
-    
-    func animateDown(duration:TimeInterval=0.4, scale:CGFloat=0.8) {
-        UIView.animate(
-            withDuration: duration,
-                    delay: 0,
-            usingSpringWithDamping: 0.7,
-            initialSpringVelocity: 0.7,
-                    options: [],
-                    animations: {
-                        self.transform = CGAffineTransform(scaleX: scale, y: scale)
-                    },
-                    completion: nil
-                )
-    }
-    
-    func animateUp(duration:TimeInterval = 0.8) {
-        UIView.animate(
-            withDuration: duration,
-                    delay: 0,
-            usingSpringWithDamping: 0.4,
-            initialSpringVelocity: 0.9,
-                    options: [],
-                    animations: {
-                        self.transform = .identity
-                    },
-                    completion: nil
-                )
     }
 }
 

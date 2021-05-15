@@ -16,10 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Enable firebase
-        FirebaseApp.configure()
-        
-        Backend.shared.updateUsername()
-        
+        FirebaseApp.configure()                
+        Backend.shared.observeUsername()
+                
         return true
     }
 

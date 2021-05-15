@@ -26,6 +26,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.rootViewController = SplashViewController()
         }
         window?.makeKeyAndVisible()
+        
+        let _ = Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user == nil {
+                let vc = IntroViewController()
+                vc.modalPresentationStyle = .fullScreen
+                vc.heroModalAnimationType = .zoomOut                
+                if let main = UIApplication.getTopViewController() {
+                    main.present(vc, animated: true, completion: nil)
+                }
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

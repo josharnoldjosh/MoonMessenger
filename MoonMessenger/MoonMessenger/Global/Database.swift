@@ -27,4 +27,26 @@ struct Backend {
             self.ref.child("users").child(user.uid).setValue(["username": User.username])
         }
     }
+    
+    func observeUsername() {
+        guard let user = Auth.auth().currentUser else {return}
+        let _ = self.ref.child("users/\(user.uid)/username").observe(DataEventType.value, with: { (snapshot) in
+            User.username = snapshot.value as? String ?? "Username"
+        })
+    }
+    
+    func getUsername(completion: @escaping (_ username:String) -> ()) {
+        guard let user = Auth.auth().currentUser else {return}
+        self.ref.child("users/\(user.uid)/username").getData { (error, snapshot) in
+            if let error = error {
+                print("Error getting data \(error)")
+                completion(User.username)
+            }
+            else if snapshot.exists() {
+                let res = snapshot.value as? String ?? "Username"
+                User.username = res
+                completion(res)
+            }
+        }
+    }
 }

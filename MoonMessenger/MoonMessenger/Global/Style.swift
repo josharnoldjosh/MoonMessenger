@@ -35,6 +35,11 @@ extension UIColor {
 
 
 extension UIFont {
+    
+    static var large:UIFont {
+        return UIFontMetrics(forTextStyle: .title1).scaledFont(for: UIFont(name: "AvenirNext-Medium", size: 30) ?? UIFont.systemFont(ofSize: UIFont.labelFontSize))
+    }
+    
     static var body:UIFont {
         return UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont(name: "AvenirNext-Medium", size: 16) ?? UIFont.systemFont(ofSize: UIFont.labelFontSize))
     }
@@ -84,5 +89,25 @@ struct Impact {
     
     static func hint() {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    }
+}
+
+
+// MARK: UIApplication extensions
+
+extension UIApplication {
+
+    class func getTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+
+        if let nav = base as? UINavigationController {
+            return getTopViewController(base: nav.visibleViewController)
+
+        } else if let tab = base as? UITabBarController, let selected = tab.selectedViewController {
+            return getTopViewController(base: selected)
+
+        } else if let presented = base?.presentedViewController {
+            return getTopViewController(base: presented)
+        }
+        return base
     }
 }

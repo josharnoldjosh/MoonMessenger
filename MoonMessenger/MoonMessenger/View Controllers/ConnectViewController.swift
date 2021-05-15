@@ -174,6 +174,8 @@ class ConnectViewController: UIViewController {
             
             if error == nil {
                 
+                Backend.shared.updateUsername()
+                
                 // Fade out
                 self.fadeOut()
                 

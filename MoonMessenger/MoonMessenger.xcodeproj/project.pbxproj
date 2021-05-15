@@ -49,6 +49,9 @@
 		798DF3A5264EF7E000C4C305 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798DF3A4264EF7E000C4C305 /* Database.swift */; };
 		798DF3A7264F009B00C4C305 /* JoinChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798DF3A6264F009B00C4C305 /* JoinChannelViewController.swift */; };
 		79BBA0FB264CB7590048062D /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BBA0FA264CB7590048062D /* ConnectViewController.swift */; };
+		79EAD00A26503ED500D989F8 /* EditChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAD00926503ED500D989F8 /* EditChannelViewController.swift */; };
+		79EAD00C2650435D00D989F8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAD00B2650435D00D989F8 /* SettingsViewController.swift */; };
+		79EAD00E26504C3800D989F8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAD00D26504C3800D989F8 /* ProfileViewController.swift */; };
 		79F3CAFE264EED8800191CF7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79F3CAFD264EED8800191CF7 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +99,9 @@
 		798DF3A4264EF7E000C4C305 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		798DF3A6264F009B00C4C305 /* JoinChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChannelViewController.swift; sourceTree = "<group>"; };
 		79BBA0FA264CB7590048062D /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
+		79EAD00926503ED500D989F8 /* EditChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChannelViewController.swift; sourceTree = "<group>"; };
+		79EAD00B2650435D00D989F8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		79EAD00D26504C3800D989F8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		79F3CAFD264EED8800191CF7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8DC0316EF88765DAAC3CAE22 /* Pods-MoonMessenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoonMessenger.release.xcconfig"; path = "Target Support Files/Pods-MoonMessenger/Pods-MoonMessenger.release.xcconfig"; sourceTree = "<group>"; };
 		B8562D25EE9919033B17DE4C /* Pods-MoonMessenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoonMessenger.debug.xcconfig"; path = "Target Support Files/Pods-MoonMessenger/Pods-MoonMessenger.debug.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +180,9 @@
 				7948ABDF264B31B3006340EB /* ConvoViewController.swift */,
 				7931239D264C4C4D00B514BB /* MessagesViewController.swift */,
 				798DF3A6264F009B00C4C305 /* JoinChannelViewController.swift */,
+				79EAD00926503ED500D989F8 /* EditChannelViewController.swift */,
+				79EAD00B2650435D00D989F8 /* SettingsViewController.swift */,
+				79EAD00D26504C3800D989F8 /* ProfileViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -394,9 +403,12 @@
 				798DF3A7264F009B00C4C305 /* JoinChannelViewController.swift in Sources */,
 				790B58142649A3FF00605696 /* LoginViewController.swift in Sources */,
 				795035E9264C55F300FF0CD9 /* BubbleCell.swift in Sources */,
+				79EAD00C2650435D00D989F8 /* SettingsViewController.swift in Sources */,
 				795035F0264C55F300FF0CD9 /* ChatView.swift in Sources */,
 				790F22982649C656000B2B59 /* WelcomeViewController.swift in Sources */,
+				79EAD00E26504C3800D989F8 /* ProfileViewController.swift in Sources */,
 				795035EF264C55F300FF0CD9 /* DateHeader.swift in Sources */,
+				79EAD00A26503ED500D989F8 /* EditChannelViewController.swift in Sources */,
 				795035F6264C55F300FF0CD9 /* EmptySeen.swift in Sources */,
 				795035EC264C55F300FF0CD9 /* ResizableGradientView.swift in Sources */,
 				7948ABE2264B32AB006340EB /* ImageButton.swift in Sources */,

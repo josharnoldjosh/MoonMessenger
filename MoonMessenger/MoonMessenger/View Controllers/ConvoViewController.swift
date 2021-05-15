@@ -233,16 +233,7 @@ final class ConvoViewController : UIViewController {
         hero.isEnabled = true
         view.backgroundColor = .background
         setupUI()
-        snap()
-        
-        let _ = Auth.auth().addStateDidChangeListener { (auth, user) in
-            if user == nil {
-                let vc = IntroViewController()
-                vc.modalPresentationStyle = .fullScreen
-                vc.heroModalAnimationType = .zoomOut
-                self.present(vc, animated: true, completion: nil)
-            }
-        }
+        snap()    
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -271,12 +262,18 @@ final class ConvoViewController : UIViewController {
         view.addSubview(newConvo)
         
         profile = ImageButton(imageNames: ["UserA", "UserB"], onTap: {
-            
+            let vc = ProfileViewController()
+            vc.heroModalAnimationType = .slide(direction: .right)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
         })
         view.addSubview(profile)
         
         settings = ImageButton(imageNames: ["SettingsA", "SettingsB"], onTap: {
-            
+            let vc = SettingsViewController()
+            vc.heroModalAnimationType = .slide(direction: .left)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
         })
         view.addSubview(settings)
     }

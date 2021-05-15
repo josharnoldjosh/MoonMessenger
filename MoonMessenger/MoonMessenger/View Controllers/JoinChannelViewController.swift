@@ -11,6 +11,7 @@ import SwiftUI
 import Preview
 import Closures
 import PopBounceButton
+import JGProgressHUD
 
 
 class JoinChannelViewController : UIViewController {
@@ -55,12 +56,20 @@ class JoinChannelViewController : UIViewController {
         view.addSubview(instructions)
         
         refresh = ImageButton(imageNames: ["RefreshA", "RefreshB"], onTap: {
-            
+            let uuid = UUID().uuidString
+            self.textfield.textfield.text = uuid
         })
         view.addSubview(refresh)
         
         copy = ImageButton(imageNames: ["CopyA", "CopyB"], onTap: {
-            
+            UIPasteboard.general.string = self.textfield.textfield.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            let hud = JGProgressHUD(style: .dark)
+            hud.textLabel.text = "Copied!"
+            hud.isUserInteractionEnabled = true
+            hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+            hud.show(in: self.view)
+            self.view.isUserInteractionEnabled = true
+            hud.dismiss(afterDelay: 0.5, animated: true)
         })
         view.addSubview(copy)
         

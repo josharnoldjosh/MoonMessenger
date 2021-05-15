@@ -83,6 +83,7 @@ class MessagesViewController : UIViewController {
             Message(text: "Maecenas malesuada nibh id ullamcorper rhoncus. Donec scelerisque tortor eget vulputate pharetra. Fusce semper est lectus, eu laoreet massa interdum nec. Vestibulum convallis fermentum lectus non imperdiet. Aenean sollicitudin congue orci, vel viverra nulla interdum eu. Nullam at turpis at lacus consectetur congue. Nunc in mauris consequat lacus luctus tincidunt eget vel mauris. Sed in tempor sem. Vivamus tristique in nibh sed pellentesque. Curabitur finibus, neque nec ullamcorper hendrerit, mauris nisl dignissim magna, a finibus turpis ipsum vel leo. Integer id lacus quis dolor consequat venenatis.", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
         ], animate: false)
         chatView.alpha = 0
+        username.alpha = 0
     }
     
     func setupUI() {
@@ -118,7 +119,7 @@ class MessagesViewController : UIViewController {
         chatView = ChatView(style: style, frame: .zero)
         
         chatView.backgroundColor = .background
-        chatView.collectionView.contentInset = UIEdgeInsets(top: 100, left: 0, bottom: 70, right: 0)
+        chatView.collectionView.contentInset = UIEdgeInsets(top: 130, left: 0, bottom: 70, right: 0)
         view.insertSubview(chatView, at: 0)
     
         chatView.didScroll = { offset in
@@ -185,6 +186,7 @@ class MessagesViewController : UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.5, delay: 0.15, options: []) {
+            self.username.alpha = 0
             self.chatView.alpha = 1
         } completion: { done in
             
@@ -192,7 +194,10 @@ class MessagesViewController : UIViewController {
     }
     
     func editChannelDetails() {
-        
+        let vc = EditChannelViewController()
+        vc.heroModalAnimationType = .zoomOut
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
 }
 
