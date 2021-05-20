@@ -73,15 +73,6 @@ class MessagesViewController : UIViewController {
             self.view.endEditing(true)
         }
         
-        chatView.addMessages([
-            Message(text: "Hey!", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
-            Message(text: "How's it going?", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
-            Message(text: "Great, hby?", origin: .incoming, date: Date(), delivered: true, seen: true, error: false),
-            Message(text: "What's new?", origin: .incoming, date: Date(), delivered: true, seen: true, error: false),
-            Message(text: "Maecenas malesuada nibh id ullamcorper rhoncus. Donec scelerisque tortor eget vulputate pharetra. Fusce semper est lectus, eu laoreet massa interdum nec. Vestibulum convallis fermentum lectus non imperdiet.", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
-            Message(text: "Maecenas malesuada nibh id ullamcorper rhoncus. Donec scelerisque tortor eget vulputate pharetra. Fusce semper est lectus, eu laoreet massa interdum nec. Vestibulum convallis fermentum lectus non imperdiet. Aenean sollicitudin congue orci, vel viverra nulla interdum eu. Nullam at turpis at lacus consectetur congue. Nunc in mauris consequat lacus luctus tincidunt eget vel mauris. Sed in tempor sem. Vivamus tristique in nibh sed pellentesque. Curabitur finibus, neque nec ullamcorper hendrerit, mauris nisl dignissim magna, a finibus turpis ipsum vel leo. Integer id lacus quis dolor consequat venenatis.", origin: .incoming, date: Date(), delivered: true, seen: true, error: false),
-            Message(text: "Maecenas malesuada nibh id ullamcorper rhoncus. Donec scelerisque tortor eget vulputate pharetra. Fusce semper est lectus, eu laoreet massa interdum nec. Vestibulum convallis fermentum lectus non imperdiet. Aenean sollicitudin congue orci, vel viverra nulla interdum eu. Nullam at turpis at lacus consectetur congue. Nunc in mauris consequat lacus luctus tincidunt eget vel mauris. Sed in tempor sem. Vivamus tristique in nibh sed pellentesque. Curabitur finibus, neque nec ullamcorper hendrerit, mauris nisl dignissim magna, a finibus turpis ipsum vel leo. Integer id lacus quis dolor consequat venenatis.", origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
-        ], animate: false)
         chatView.alpha = 0
         username.alpha = 0
     }
@@ -100,6 +91,7 @@ class MessagesViewController : UIViewController {
         
         username.font = .caption
         username.text = convo.username
+        username.alpha = 0.5
         view.addSubview(username)
         
         back = BackButton(tap: {
@@ -125,9 +117,10 @@ class MessagesViewController : UIViewController {
         chatView.didScroll = { offset in
             if offset.y <= -130 {
                 UIView.animate(withDuration: 0.2) {
-                    self.username.alpha = 1
+                    self.username.alpha = 0.5
                 }
             }else{
+                guard self.chatView.data.snapshot().itemIdentifiers.count > 0 else {return}
                 UIView.animate(withDuration: 0.2) {
                     self.username.alpha = 0
                 }
@@ -135,10 +128,9 @@ class MessagesViewController : UIViewController {
         }
     
         input = InputViewWrapper(success: { text in
-            self.chatView.addMessages([
-                Message(text: text, origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
-            ])
+            self.sendMessage(text: text)
         })
+        
         input.input.textfield.onEditingEnded {
             self.chatView.scrollToBottom()
             UIView.animateKeyframes(withDuration: 0.5, delay: 0.12, options: []) {
@@ -185,8 +177,8 @@ class MessagesViewController : UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+                        
         UIView.animate(withDuration: 0.5, delay: 0.15, options: []) {
-            self.username.alpha = 0
             self.chatView.alpha = 1
         } completion: { done in
             
@@ -198,6 +190,14 @@ class MessagesViewController : UIViewController {
         vc.heroModalAnimationType = .zoomOut
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    func sendMessage(text: String) {
+        self.chatView.addMessages([
+            Message(text: text, origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
+        ])
+        
+        Backend.shared.sendMessage(text: text, id: convo.id.uuidString)        
     }
 }
 

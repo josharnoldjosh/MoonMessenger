@@ -40,7 +40,7 @@ class ShinyButton : PopBounceButton {
         addSubview(button)
         button.text = title
         button.font = .caption
-        button.textColor = UIColor(white: 1, alpha: 1)
+        button.textColor = .white
         button.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -50,7 +50,9 @@ class ShinyButton : PopBounceButton {
         self.addAction(UIAction(handler: { tap in
             Impact.button()
             onTap()
-        }), for: .touchUpInside)        
+        }), for: .touchUpInside)
+        
+        self.bringSubviewToFront(button)
     }
     
     required init?(coder: NSCoder) {

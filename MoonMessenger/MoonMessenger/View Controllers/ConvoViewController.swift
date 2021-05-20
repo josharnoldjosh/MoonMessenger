@@ -13,12 +13,20 @@ import SnapKit
 import Firebase
 
 
-struct ConvoItem : Hashable {
+struct ConvoItem : Hashable, Equatable {
     var id:UUID
     var username:String
     var image:UIImage
     var lastMessageDate:Date
     var lastMessageText:String
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: ConvoItem, rhs: ConvoItem) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 
@@ -141,7 +149,7 @@ final class ConvoList : UIView, UICollectionViewDelegate {
         super.init(frame: .zero)
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: getLayout())
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = .background
         collectionView.delegate = self
         addSubview(collectionView)
         
@@ -165,17 +173,18 @@ final class ConvoList : UIView, UICollectionViewDelegate {
     }
     
     public func refresh() {
-        var snap = data.snapshot()
-        if snap.sectionIdentifiers.count == 0 {
-            snap.appendSections([0])
+        ConvoBuilder.getData { items in
+            DispatchQueue.main.async {
+                var snap = self.data.snapshot()
+                if snap.itemIdentifiers.count > 0 { snap.deleteAllItems() }
+                if snap.sectionIdentifiers.count == 0 { snap.appendSections([0]) }
+                snap.appendItems(items)
+                self.data.apply(snap)
+                UIView.animate(withDuration: 0.5) {
+                    self.alpha = snap.itemIdentifiers.count > 0 ? 1 : 0
+                }
+            }
         }
-        guard snap.itemIdentifiers.count < 2 else {return}
-        snap.appendItems([
-            ConvoItem(id: UUID(), username: "Naruto", image: UIImage(named: "Naruto") ?? UIImage(), lastMessageDate: Date(), lastMessageText: "Hey! How's it going?"),
-            ConvoItem(id: UUID(), username: "Kakashi", image: UIImage(named: "Kakashi") ?? UIImage(), lastMessageDate: Date(), lastMessageText: "Hello world. This is a message..."),
-        ])
-        print(snap.itemIdentifiers.count)
-        data.apply(snap)
     }
     
     private func getLayout() -> UICollectionViewCompositionalLayout {
@@ -186,7 +195,6 @@ final class ConvoList : UIView, UICollectionViewDelegate {
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
-    
     
     //TODO: Add touch down animation
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
@@ -218,6 +226,8 @@ final class ConvoViewController : UIViewController {
     var profile:ImageButton!
     var settings:ImageButton!
     
+    var noMessagesLabel:UILabel = .body()
+    
     var convoList:ConvoList!
             
     override var shouldAutorotate: Bool {
@@ -233,24 +243,29 @@ final class ConvoViewController : UIViewController {
         hero.isEnabled = true
         view.backgroundColor = .background
         setupUI()
-        snap()    
+        snap()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        convoList.refresh()                
+        Backend.shared.observeUser {
+            self.convoList.refresh()
+        }
     }
     
     func setupUI() {
         logo.contentMode = .scaleAspectFit
         view.addSubview(logo)
         
+        noMessagesLabel.text = "No Messages Synced"
+        view.addSubview(noMessagesLabel)
+        
         convoList = ConvoList() { convo in
             let vc = MessagesViewController(convo: convo)
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         }
+        convoList.alpha = 0
         view.addSubview(convoList)
         
         newConvo = ImageButton(imageNames: ["ButtonCircleA", "ButtonCircleC"], onTap: {
@@ -285,6 +300,10 @@ final class ConvoViewController : UIViewController {
             make.width.height.equalTo(30)
         }
         
+        noMessagesLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         newConvo.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
@@ -311,7 +330,27 @@ final class ConvoViewController : UIViewController {
     }
 }
 
-
+fileprivate struct ConvoBuilder {
+        
+    static func getData(completion: @escaping (_ convos:[ConvoItem]) -> ()) {
+        DispatchQueue.main.async {
+            Backend.shared.getConvoKeys { keys in
+                let result = keys
+                .sorted()
+                .map { item in
+                    return ConvoItem(
+                        id: UUID(uuidString: item) ?? UUID(),
+                        username: item,
+                        image: UIImage(named: "Kakashi") ?? UIImage(named: "UserIcon")!,
+                        lastMessageDate: Date(),
+                        lastMessageText: ""
+                    )
+                }
+                completion(result)
+            }
+        }
+    }
+}
 
 @available(iOS 13.0, *)
 struct ConvoViewControllerContentView_Previews : PreviewProvider {

@@ -242,6 +242,7 @@ extension ChatView {
      * Scrolls to the bottom/most recent message in the ChatView.
      */
     public func scrollToBottom(animated:Bool = true) {
+        guard self.data.snapshot().sectionIdentifiers.count > 0 else {return}
         DispatchQueue.main.asyncAfter(deadline: .now()+0.2, execute: {
             let lastSection = self.collectionView.numberOfSections - 1
             let lastRow = self.collectionView.numberOfItems(inSection: lastSection)

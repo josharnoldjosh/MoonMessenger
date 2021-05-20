@@ -38,8 +38,7 @@ class JoinChannelViewController : UIViewController {
     
     func setupUI() {
         back = BackButton(tap: {
-            self.hero.modalAnimationType = .slide(direction: .right)
-            self.hero.dismissViewController()
+            self.pop()
         })
         view.addSubview(back)
         
@@ -63,20 +62,57 @@ class JoinChannelViewController : UIViewController {
         
         copy = ImageButton(imageNames: ["CopyA", "CopyB"], onTap: {
             UIPasteboard.general.string = self.textfield.textfield.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-            let hud = JGProgressHUD(style: .dark)
-            hud.textLabel.text = "Copied!"
-            hud.isUserInteractionEnabled = true
-            hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-            hud.show(in: self.view)
-            self.view.isUserInteractionEnabled = true
-            hud.dismiss(afterDelay: 0.5, animated: true)
+            self.showCopied()
         })
         view.addSubview(copy)
         
         continueButton = ShinyButton("Continue", onTap: {
             
+            let result = self.textfield.textfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            
+            guard result.count >= UUID().uuidString.count else { return }
+            
+            let hud = JGProgressHUD()
+            hud.style = .dark
+            hud.show(in: self.view)
+            
+            Backend.shared.createConvo(key: result, completion: { error in
+                    hud.dismiss()
+                    if error == nil {
+                        self.pop()
+                    }else{
+                        self.showError()
+                    }
+            })
         })
         view.addSubview(continueButton)
+    }
+    
+    func showError() {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Error!"
+        hud.textLabel.font = .body
+        hud.isUserInteractionEnabled = true
+        hud.indicatorView = JGProgressHUDErrorIndicatorView()
+        hud.show(in: self.view)
+        self.view.isUserInteractionEnabled = true
+        hud.dismiss(afterDelay: 0.5, animated: true)
+    }
+    
+    func showCopied() {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Copied!"
+        hud.textLabel.font = .body
+        hud.isUserInteractionEnabled = true
+        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        hud.show(in: self.view)
+        self.view.isUserInteractionEnabled = true
+        hud.dismiss(afterDelay: 0.5, animated: true)
+    }
+    
+    func pop() {
+        self.hero.modalAnimationType = .slide(direction: .right)
+        self.hero.dismissViewController()
     }
     
     func snap() {
