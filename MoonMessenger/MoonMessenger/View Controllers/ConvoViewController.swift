@@ -363,11 +363,12 @@ fileprivate struct ConvoBuilder {
                     return ConvoItem(
                         id: UUID(uuidString: item) ?? UUID(),
                         username: "",
-                        image: UIImage(named: "Kakashi") ?? UIImage(named: "UserIcon")!,
+                        image: UIImage(named: "Placeholder") ?? UIImage(named: "Placeholder")!,
                         lastMessageDate: Date(),
                         lastMessageText: ""
                     )
                 }
+//                .sorted { $0.lastMessageDate < $1.lastMessageDate }
                 completion(result)
             }
         }

@@ -126,7 +126,8 @@ struct Backend {
                             date: Date(timeIntervalSince1970: j["date"] as? TimeInterval ?? 0),
                             delivered: true,
                             seen: true,
-                            error: false)
+                            error: false,
+                            username: j["username"] as? String ?? "User")
                     }
                     return Message(id: UUID(), text: "<ERROR>")
                 })

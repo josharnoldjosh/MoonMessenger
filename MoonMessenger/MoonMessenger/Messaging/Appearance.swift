@@ -36,6 +36,11 @@ struct DateStampStyle {
     var color:UIColor = .systemGray2
 }
 
+struct UsernameStyle {
+    var font:UIFont = UIFont.preferredFont(forTextStyle: .caption1)
+    var color:UIColor = .systemGray2
+}
+
 
 struct AvatarStyle {
     var showIncomingAvatar:Bool = true
@@ -71,6 +76,7 @@ struct ChatStyle {
     
     var layout:LayoutStyle              = LayoutStyle()
     var dateStamp:DateStampStyle        = DateStampStyle()
+    var username:UsernameStyle          = UsernameStyle()
     var avatar:AvatarStyle              = AvatarStyle()
     var typingIndicator:TypingStyle     = TypingStyle()
     var seen:SeenStyle                  = SeenStyle()

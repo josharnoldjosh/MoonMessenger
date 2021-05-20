@@ -40,8 +40,7 @@ final class DataBuilder {
                     return $0.changing(change: {$0.seen = true})
                 }
                 return $0.changing(change: {$0.seen = false})
-            })
-            print(self.messages.filter({$0.seen == true}).count)
+            })            
         }
 
         for i in 0...self.messages.count-1 {

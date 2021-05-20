@@ -72,6 +72,8 @@ class MessagesViewController : UIViewController {
         view.addTapGesture { tap in
             self.view.endEditing(true)
         }
+        
+        self.chatView.alpha = 0
     }
     
     func setupUI() {
@@ -184,6 +186,12 @@ class MessagesViewController : UIViewController {
                 self.username.text = name
             }
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            UIView.animate(withDuration: 0.5) {
+                self.chatView.alpha = 1.0
+            }
+        }
     }
     
     func editChannelDetails() {
@@ -205,7 +213,7 @@ struct MessagesViewControllerContentView_Previews : PreviewProvider {
         Group {
             Preview.make(
                 MessagesViewController(
-                            convo: ConvoItem(id: UUID(), username: "KAKASHI", image: UIImage(named: "Kakashi") ?? UIImage(), lastMessageDate: Date(), lastMessageText: "Hello")
+                            convo: ConvoItem(id: UUID(), username: "Placeholder", image: UIImage(named: "Placeholder") ?? UIImage(), lastMessageDate: Date(), lastMessageText: "Hello")
             ))
         }
     }

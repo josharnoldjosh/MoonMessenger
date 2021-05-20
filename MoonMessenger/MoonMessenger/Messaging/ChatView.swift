@@ -13,6 +13,7 @@ struct ElementKind  {
     static let avatar = "avatar-element-kind"
     static let seen = "seen-element-kind"
     static let date = "date-element-kind"
+    static let username = "username-element-kind"
 }
 
 
@@ -75,6 +76,10 @@ final class ChatView : UIView, UIScrollViewDelegate {
         // "Date" Header
         collectionView.register(DateHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DateHeader.reuseIdentifier)
         
+        // "Username" Header
+        collectionView.register(UsernameHeader.self, forSupplementaryViewOfKind: ElementKind.username, withReuseIdentifier: UsernameHeader.reuseIdentifier)
+        collectionView.register(EmptyUsernameHeader.self, forSupplementaryViewOfKind: ElementKind.username, withReuseIdentifier: EmptyUsernameHeader.reuseIdentifier)
+        
         // Empty Header, a.k.a, nothing
         collectionView.register(EmptyHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: EmptyHeader.reuseIdentifier)
         
@@ -104,8 +109,16 @@ final class ChatView : UIView, UIScrollViewDelegate {
         section.interGroupSpacing = self.style.layout.sameMessageSpacing
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = self.style.layout.uniqueMessageSpacing
-        section.boundarySupplementaryItems = [makeDateHeader()]
+        section.boundarySupplementaryItems = [makeDateHeader(), makeUsernameHeader()]
         return UICollectionViewCompositionalLayout.init(section: section, configuration: config)
+    }
+    
+    func makeUsernameHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        return NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(8)),
+            elementKind: ElementKind.username,
+            alignment: .top
+        )
     }
     
     func makeDateHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
@@ -117,7 +130,7 @@ final class ChatView : UIView, UIScrollViewDelegate {
     }
     
     func makeAvatar() -> NSCollectionLayoutSupplementaryItem {
-        let anchor = NSCollectionLayoutAnchor(edges: [.bottom, .leading], fractionalOffset: CGPoint(x: -0.75, y: 0))
+        let anchor = NSCollectionLayoutAnchor(edges: [.bottom, .leading], fractionalOffset: CGPoint(x: -0.8, y: 0))
         let scale = style.avatar.scale
         let size = NSCollectionLayoutSize(widthDimension: .absolute(scale), heightDimension: .absolute(scale))
         let badge = NSCollectionLayoutSupplementaryItem(layoutSize: size, elementKind: ElementKind.avatar, containerAnchor: anchor)
@@ -182,6 +195,10 @@ final class ChatView : UIView, UIScrollViewDelegate {
                         
             if kind == UICollectionView.elementKindSectionHeader {
                 return DateStampBuilder(data: self.data, style: self.style).build(collectionView: collectionView, kind: kind, indexPath: indexPath)
+            }
+            
+            if kind == ElementKind.username {
+                return UsernameHeaderBuilder(data: self.data, style: self.style).build(collectionView: collectionView, kind: kind, indexPath: indexPath)
             }
             
             if kind == ElementKind.avatar {

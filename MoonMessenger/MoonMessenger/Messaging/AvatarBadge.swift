@@ -23,7 +23,7 @@ class AvatarBadge : UICollectionReusableView {
         super.init(frame: frame)
         addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview()            
         }
     }
     

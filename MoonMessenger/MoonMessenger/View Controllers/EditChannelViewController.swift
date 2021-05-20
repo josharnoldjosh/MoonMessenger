@@ -72,7 +72,7 @@ class EditChannelViewController : UIViewController {
             // Show edit profile logic
         }), for: .touchUpInside)
         profilePicture.imageView?.contentMode = .scaleAspectFit
-        profilePicture.setImage(UIImage(named: "UserIcon") ?? UIImage(), for: .normal)
+        profilePicture.setImage(UIImage(named: "Placeholder") ?? UIImage(), for: .normal)
         profilePicture.backgroundColor = .lightShadow
         profilePicture.layer.cornerRadius = 70 / 2
         profilePicture.layer.masksToBounds = true

@@ -46,6 +46,8 @@
 		795035F5264C55F300FF0CD9 /* SeenBadgeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035E6264C55F300FF0CD9 /* SeenBadgeBuilder.swift */; };
 		795035F6264C55F300FF0CD9 /* EmptySeen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035E7264C55F300FF0CD9 /* EmptySeen.swift */; };
 		795035F8264C5B9500FF0CD9 /* ChatInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035F7264C5B9500FF0CD9 /* ChatInputTextField.swift */; };
+		7960B1D02656FD13008C9077 /* UsernameHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7960B1CF2656FD13008C9077 /* UsernameHeader.swift */; };
+		7960B1D22656FF92008C9077 /* UsernameHeaderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7960B1D12656FF92008C9077 /* UsernameHeaderBuilder.swift */; };
 		798DF3A5264EF7E000C4C305 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798DF3A4264EF7E000C4C305 /* Database.swift */; };
 		798DF3A7264F009B00C4C305 /* JoinChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798DF3A6264F009B00C4C305 /* JoinChannelViewController.swift */; };
 		79BBA0FB264CB7590048062D /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BBA0FA264CB7590048062D /* ConnectViewController.swift */; };
@@ -96,6 +98,8 @@
 		795035E6264C55F300FF0CD9 /* SeenBadgeBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeenBadgeBuilder.swift; sourceTree = "<group>"; };
 		795035E7264C55F300FF0CD9 /* EmptySeen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySeen.swift; sourceTree = "<group>"; };
 		795035F7264C5B9500FF0CD9 /* ChatInputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputTextField.swift; sourceTree = "<group>"; };
+		7960B1CF2656FD13008C9077 /* UsernameHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameHeader.swift; sourceTree = "<group>"; };
+		7960B1D12656FF92008C9077 /* UsernameHeaderBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameHeaderBuilder.swift; sourceTree = "<group>"; };
 		798DF3A4264EF7E000C4C305 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		798DF3A6264F009B00C4C305 /* JoinChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChannelViewController.swift; sourceTree = "<group>"; };
 		79BBA0FA264CB7590048062D /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 				795035E1264C55F200FF0CD9 /* ChatView.swift */,
 				795035E3264C55F200FF0CD9 /* DataBuilder.swift */,
 				795035E0264C55F200FF0CD9 /* DateHeader.swift */,
+				7960B1CF2656FD13008C9077 /* UsernameHeader.swift */,
+				7960B1D12656FF92008C9077 /* UsernameHeaderBuilder.swift */,
 				795035DB264C55F200FF0CD9 /* DateStampBuilder.swift */,
 				795035E7264C55F300FF0CD9 /* EmptySeen.swift */,
 				795035E2264C55F200FF0CD9 /* IncomingBubbleCell.swift */,
@@ -398,7 +404,9 @@
 				792862E72649842E00BD5172 /* ShinyButton.swift in Sources */,
 				790B581226499B7C00605696 /* TextField.swift in Sources */,
 				793123A0264C515D00B514BB /* BackButton.swift in Sources */,
+				7960B1D02656FD13008C9077 /* UsernameHeader.swift in Sources */,
 				7948ABE0264B31B3006340EB /* ConvoViewController.swift in Sources */,
+				7960B1D22656FF92008C9077 /* UsernameHeaderBuilder.swift in Sources */,
 				792BC6BD264856B50016E411 /* SceneDelegate.swift in Sources */,
 				798DF3A7264F009B00C4C305 /* JoinChannelViewController.swift in Sources */,
 				790B58142649A3FF00605696 /* LoginViewController.swift in Sources */,
