@@ -105,19 +105,100 @@ struct Backend {
                     "text": text,
                     "user": user.uid,
                     "username": User.username,
-                    "date": Date().timeIntervalSince1970
+                    "date": Date().timeIntervalSince1970,
+                    "messageId": UUID().uuidString
                 ])
         }
     }
-    
-    //TODO: Finish this function & connect it to MessagesViewController
-    func getMessages(id:String) {
+        
+    func getMessages(id:String, completion: @escaping (_ messages:[Message]) -> ()) {
+        guard let user = Auth.auth().currentUser else {return}
         let _ = self.ref.child("conversations/\(id)").observe(DataEventType.value, with: { (snapshot) in
-            print(snapshot.value)
+            if let data = snapshot.value as? [String:Any] {
+                let res = data.map({ i in
+                    i.value
+                }).map({ j -> Message in
+                    if let j = j as? [String:Any] {
+                        return Message(
+                            id: UUID(uuidString: j["messageId"] as? String ?? UUID().uuidString) ?? UUID(),
+                            text: j["text"] as? String ?? "<ERROR>",
+                            origin: j["user"] as? String ?? "" == user.uid ? .outgoing : .incoming,
+                            date: Date(timeIntervalSince1970: j["date"] as? TimeInterval ?? 0),
+                            delivered: true,
+                            seen: true,
+                            error: false)
+                    }
+                    return Message(id: UUID(), text: "<ERROR>")
+                })
+                .sorted { i, j in
+                    i.date < j.date
+                }
+                completion(res)
+            }
+        })
+    }
+        
+    func getConvoName(id: String, completion: @escaping (_ name:String) -> ()) {
+        let _ = self.ref.child("convoData/\(id)/name").observe(.value, with: { (snapshot) in
+            if let res = snapshot.value as? String {
+                completion(res)
+            }else{
+                let newName:String = .random()
+                self.ref.child("convoData/\(id)/name").setValue(newName)
+                completion(newName)
+            }
+        })
+    }
+    
+    func setConvoName(id: String, name: String) {
+        self.ref.child("convoData/\(id)/name").setValue(name)
+    }
+    
+    func getConvoMessage(id: String, completion: @escaping (_ message:String, _ date:Date, _ dateStr:String) -> ()) {
+        guard let user = Auth.auth().currentUser else {return}
+        let _ = self.ref.child("conversations/\(id)").observe(DataEventType.value, with: { (snapshot) in
+            if let data = snapshot.value as? [String:Any] {
+                let res = data.map({ i in
+                    i.value
+                }).map({ j -> Message in
+                    if let j = j as? [String:Any] {
+                        return Message(
+                            id: UUID(uuidString: j["messageId"] as? String ?? UUID().uuidString) ?? UUID(),
+                            text: j["text"] as? String ?? "<ERROR>",
+                            origin: j["user"] as? String ?? "" == user.uid ? .outgoing : .incoming,
+                            date: Date(timeIntervalSince1970: j["date"] as? TimeInterval ?? 0),
+                            delivered: true,
+                            seen: true,
+                            error: false,
+                            username: j["user"] as? String ?? "" == user.uid ? "You" : j["username"] as? String ?? "User"
+                            )
+                    }
+                    return Message(id: UUID(), text: "<ERROR>")
+                })
+                .sorted { i, j in
+                    i.date < j.date
+                }
+                .last
+                completion(
+                    "\(res?.username ?? "User"): \(res?.text ?? "Message")",
+                    res?.date ?? Date(),
+                    res?.date.relativeTime ?? "0m"
+                )
+            }else{
+                completion("No messages yet.", Date(), "")
+            }
         })
     }
 }
 
+
+extension String {
+    static func random() -> String {
+        let a = ["Cool", "Interesting", "Informed", "Spicy", "Juicy", "Moist", "Funny", "Goofy", "Angry", "Filthy", "Sinister", "Hairless"]
+        let b = ["Cow", "Hippo", "Lion", "Tiger", "Anteater", "Alpaca", "Baboon", "Bear", "Bullfrog", "Bumblebee", "Desert Tortoise"]
+        return "\(a.randomElement() ?? "New") \(b.randomElement() ?? "Conversation")"
+    }
+}
 
 
 extension Sequence where Element: Hashable {

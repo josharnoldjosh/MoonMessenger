@@ -72,9 +72,6 @@ class MessagesViewController : UIViewController {
         view.addTapGesture { tap in
             self.view.endEditing(true)
         }
-        
-        chatView.alpha = 0
-        username.alpha = 0
     }
     
     func setupUI() {
@@ -102,7 +99,7 @@ class MessagesViewController : UIViewController {
         
         var style = ChatStyle()
         style.seen = SeenStyle(enableSeen: false, scale: 0, avatorImage: UIImage(), tintColor: .white)
-        style.outgoing.gradient.colors = [.primary, .secondary]
+        style.outgoing.gradient.colors = [.secondary, .primary]
         style.incoming.gradient.colors = [.lightShadow]
         style.incoming.label.textColor = .white
         style.avatar.avatorImage = convo.image
@@ -164,8 +161,8 @@ class MessagesViewController : UIViewController {
         }
         
         chatView.snp.makeConstraints { make in
-//            make.edges.equalTo(self.view.safeAreaLayoutGuide)
-            make.edges.equalToSuperview()
+            make.left.right.equalTo(self.view.safeAreaLayoutGuide)
+            make.top.bottom.equalToSuperview().inset(45)
         }
         
         input.snp.makeConstraints { make in
@@ -177,26 +174,26 @@ class MessagesViewController : UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-                        
-        UIView.animate(withDuration: 0.5, delay: 0.15, options: []) {
-            self.chatView.alpha = 1
-        } completion: { done in
-            
+  
+        Backend.shared.getMessages(id: convo.id.uuidString, completion: { messages in
+            self.chatView.diffMessages(messages)
+        })
+        
+        Backend.shared.getConvoName(id: convo.id.uuidString) { name in
+            DispatchQueue.main.async {
+                self.username.text = name
+            }
         }
     }
     
     func editChannelDetails() {
-        let vc = EditChannelViewController()
+        let vc = EditChannelViewController(convo: self.convo)        
         vc.heroModalAnimationType = .zoomOut
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
     
-    func sendMessage(text: String) {
-        self.chatView.addMessages([
-            Message(text: text, origin: .outgoing, date: Date(), delivered: true, seen: true, error: false),
-        ])
-        
+    func sendMessage(text: String) {        
         Backend.shared.sendMessage(text: text, id: convo.id.uuidString)        
     }
 }

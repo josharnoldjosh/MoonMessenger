@@ -11,6 +11,7 @@ import SwiftUI
 import Preview
 import Closures
 import PopBounceButton
+import JGProgressHUD
 
 
 class EditChannelViewController : UIViewController {
@@ -20,8 +21,22 @@ class EditChannelViewController : UIViewController {
     var textfield:TextField!
     var instructions:UILabel = UILabel.body()
     var privateKey:PopBounceButton!
+    var convo:ConvoItem!
     
+    init() {
+        self.convo = ConvoItem(id: UUID(), username: "Stephan", image: UIImage(), lastMessageDate: Date(), lastMessageText: "HellO!")
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    init(convo:ConvoItem) {
+        self.convo = convo
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .background
@@ -31,6 +46,17 @@ class EditChannelViewController : UIViewController {
         }
         setupUI()
         snap()
+        
+        Backend.shared.getConvoName(id: convo.id.uuidString) { name in
+            DispatchQueue.main.async {
+                self.textfield.textfield.text = name
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        Backend.shared.setConvoName(id: self.convo.id.uuidString, name: self.textfield.textfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? .random())
     }
     
     func setupUI() {
@@ -62,11 +88,11 @@ class EditChannelViewController : UIViewController {
         view.addSubview(instructions)
         
         privateKey = PopBounceButton()
-        privateKey.setTitle("3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy", for: .normal)
+        privateKey.setTitle(self.convo.id.uuidString, for: .normal)
         privateKey.titleLabel?.font = .mini
         privateKey.titleLabel?.alpha = 0.5
         privateKey.addAction(UIAction(handler: { tap in
-            // Show tap
+            self.showCopied()
             Impact.hint()
         }), for: .touchUpInside)
         view.addSubview(privateKey)
@@ -102,6 +128,18 @@ class EditChannelViewController : UIViewController {
             make.bottom.left.right.equalTo(self.view.safeAreaLayoutGuide)
             make.height.lessThanOrEqualToSuperview()
         }
+    }
+    
+    func showCopied() {
+        UIPasteboard.general.string = self.privateKey.titleLabel?.text ?? ""
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Copied!"
+        hud.textLabel.font = .body
+        hud.isUserInteractionEnabled = true
+        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        hud.show(in: self.view)
+        self.view.isUserInteractionEnabled = true
+        hud.dismiss(afterDelay: 0.5, animated: true)
     }
 }
 

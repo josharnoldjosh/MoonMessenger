@@ -238,6 +238,18 @@ extension ChatView {
         }
     }
     
+    public func diffMessages(_ messages:[Message], scrollToBottom:Bool = true, animate:Bool = true) {
+        var snap = self.data.snapshot()
+        snap.deleteAllItems()
+        let builder = DataBuilder(data: snap)
+        snap = builder.build(messages: messages)
+        self.data.apply(snap, animatingDifferences: animate)
+                
+        if scrollToBottom {
+            self.scrollToBottom(animated: animate)
+        }
+    }
+    
     /**
      * Scrolls to the bottom/most recent message in the ChatView.
      */

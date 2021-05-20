@@ -38,11 +38,19 @@ final class ConvoCell : UICollectionViewCell {
     var time:UILabel!
     var line:UIView!
     let inset:CGFloat = 15
+    private var date:Date = Date()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
         snap()
+        
+        let _ = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { timer in
+            self.time.attributedText = NSAttributedString(
+                string: self.date.relativeTime,
+                attributes: [.font : UIFont.mini]
+            )
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -116,18 +124,32 @@ final class ConvoCell : UICollectionViewCell {
     
     func applyData(item:ConvoItem) {
         imageView.image = item.image
-        username.attributedText = NSAttributedString(
-            string: item.username,
-            attributes: [.kern : 2, .font : UIFont.mini]
-        )
-        text.attributedText = NSAttributedString(
-            string: item.lastMessageText,
-            attributes: [.font : UIFont.caption]
-        )
-        time.attributedText = NSAttributedString(
-            string: "5m",
-            attributes: [.font : UIFont.mini]
-        )
+        
+        Backend.shared.getConvoName(id: item.id.uuidString) { name in
+            DispatchQueue.main.async {                            
+                self.username.attributedText = NSAttributedString(
+                    string: name,
+                    attributes: [.kern : 2, .font : UIFont.mini]
+                )
+            }
+        }
+        
+        Backend.shared.getConvoMessage(id: item.id.uuidString) { text, date, dateStr in
+            self.date = date
+            DispatchQueue.main.async {
+                self.text.attributedText = NSAttributedString(
+                    string: text,
+                    attributes: [.font : UIFont.caption]
+                )
+                
+                self.time.attributedText = NSAttributedString(
+                    string: dateStr,
+                    attributes: [.font : UIFont.mini]
+                )
+            }
+        }
+                        
+
     }
     
     override func layoutSubviews() {
@@ -340,7 +362,7 @@ fileprivate struct ConvoBuilder {
                 .map { item in
                     return ConvoItem(
                         id: UUID(uuidString: item) ?? UUID(),
-                        username: item,
+                        username: "",
                         image: UIImage(named: "Kakashi") ?? UIImage(named: "UserIcon")!,
                         lastMessageDate: Date(),
                         lastMessageText: ""

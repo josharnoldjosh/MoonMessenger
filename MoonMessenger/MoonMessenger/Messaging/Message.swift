@@ -41,7 +41,7 @@ struct DateStamp : Hashable, Sendable {
 }
 
 
-struct Message : Hashable, Sendable, Changeable {
+struct Message : Hashable, Equatable, Sendable, Changeable {
     
     var origin:Origin
     var text:String
@@ -57,8 +57,10 @@ struct Message : Hashable, Sendable, Changeable {
         
     /// Whether or not there was an error sending the message
     var error:Bool = false
+    
+    var username:String = "User"
         
-    init(text:String, origin:Origin = .outgoing, date:Date = Date(), delivered:Bool = false, seen:Bool = false, error:Bool = false) {
+    init(id: UUID, text:String, origin:Origin = .outgoing, date:Date = Date(), delivered:Bool = false, seen:Bool = false, error:Bool = false, username:String = "User") {
         self.text = text
         self.id = UUID()
         self.origin = origin
@@ -66,6 +68,11 @@ struct Message : Hashable, Sendable, Changeable {
         self.delivered = delivered
         self.seen = (origin == .outgoing ? false : true) || seen
         self.error = false
+        self.username = username
+    }
+    
+    static func == (lhs: Message, rhs: Message) -> Bool {
+        return lhs.id == rhs.id
     }
     
     func hash(into hasher: inout Hasher) {

@@ -122,6 +122,14 @@ extension Date {
     
     var relativeTime: String {
         
+        if minutesFromNow == 0 {
+            return "Just now"
+        }
+        
+        if hoursFromNow < 1 {
+            return "\(self.minutesFromNow)m ago"
+        }
+        
         if hoursFromNow <= 24 {
             return self.time
         }
