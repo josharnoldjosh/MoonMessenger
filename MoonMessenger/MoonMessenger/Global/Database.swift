@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import SwiftUI
+import URLImage
 import Firebase
 import FirebaseDatabase
-import SwiftUI
+import Nuke
 
 
 struct User {
@@ -16,11 +18,13 @@ struct User {
 }
 
 
+
 struct Backend {
     
     static let shared = Backend()
-    
+        
     var ref: DatabaseReference = Database.database().reference()
+    var storageRef = Storage.storage().reference()
     
     func updateUsername() {
         if let user = Auth.auth().currentUser {
@@ -127,7 +131,9 @@ struct Backend {
                             delivered: true,
                             seen: true,
                             error: false,
-                            username: j["username"] as? String ?? "User")
+                            username: j["username"] as? String ?? "User",
+                            userId: j["user"] as? String ?? ""
+                        )
                     }
                     return Message(id: UUID(), text: "<ERROR>")
                 })
@@ -189,6 +195,39 @@ struct Backend {
                 completion("No messages yet.", Date(), "")
             }
         })
+    }
+    
+        
+    func uploadImage(id: String, image:UIImage) {
+        let subRef = self.storageRef.child(id+".png")
+        guard let data = image.pngData() else {return}
+        let _ = subRef.putData(data, metadata: nil) { (metadata, error) in
+            if error == nil {
+                print("Successfully uploaded image!")
+            }else{
+                print("Image failed to upload :(")
+            }
+        }
+    }
+    
+    //TODO: Make sure images "cache"
+    func getImage(id:String, completion: @escaping (_ result:UIImage) -> ()) {
+        let subRef = self.storageRef.child(id+".png")
+        subRef.downloadURL { (url, error) in
+            guard let downloadURL = url else { return}
+            
+            ImagePipeline {
+                $0.dataCache = try? DataCache(name: "com.myapp.datacache")
+            }
+            
+            ImagePipeline.shared.loadImage(with: downloadURL) { result in
+                switch result {
+                case .success(let value):
+                    let image = value.image
+                    completion(image)
+                case .failure(_): break }                
+            }
+        }
     }
 }
 

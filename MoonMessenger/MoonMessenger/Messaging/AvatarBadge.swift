@@ -17,7 +17,7 @@ class EmptyAvatar : UICollectionReusableView {
 class AvatarBadge : UICollectionReusableView {
         
     static var reuseIdentifier:String = "avatarBadge"
-    var imageView:UIImageView = UIImageView(image: UIImage(systemName: "person.crop.circle") ?? UIImage())
+    var imageView:UIImageView = UIImageView(image: UIImage(named: "Placeholder") ?? UIImage())
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,8 +31,10 @@ class AvatarBadge : UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setAvatar(style:ChatStyle = ChatStyle()) {
-        imageView.image = style.avatar.avatorImage
+    func setAvatar(message:Message, style:ChatStyle = ChatStyle()) {
+        Backend.shared.getImage(id: message.userId) { image in
+            self.imageView.image = image
+        }
         imageView.contentMode = .scaleAspectFill
         imageView.tintColor = style.avatar.tintColor
         imageView.layer.cornerRadius = style.avatar.scale / 2

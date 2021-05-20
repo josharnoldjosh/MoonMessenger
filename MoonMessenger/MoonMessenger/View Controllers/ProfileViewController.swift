@@ -12,10 +12,11 @@ import Preview
 import Closures
 import PopBounceButton
 import Firebase
+import ImagePicker
 
 
-final class ProfileViewController : UIViewController {
-    
+final class ProfileViewController : UIViewController, ImagePickerDelegate {
+        
     var back:BackButton!
     var username:TextField = TextField(imageName: "", placeholder: "Username")
     var profilePicture:PopBounceButton!
@@ -32,10 +33,17 @@ final class ProfileViewController : UIViewController {
         }
         setupUI()
         snap()
+        
+        self.profilePicture.alpha = 0
+        if let id = Auth.auth().currentUser?.uid {
+            Backend.shared.getImage(id: id) { image in
+                self.profilePicture.setImage(image, for: .normal)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)        
+        super.viewWillAppear(animated)
         self.username.textfield.text = User.username
     }
     
@@ -43,6 +51,11 @@ final class ProfileViewController : UIViewController {
         super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.5) {
             self.moon.transform = .identity
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            UIView.animate(withDuration: 0.5) {
+                self.profilePicture.alpha = 1
+            }
         }
     }
     
@@ -74,9 +87,9 @@ final class ProfileViewController : UIViewController {
         profilePicture = PopBounceButton()
         profilePicture.addAction(UIAction(handler: { tap in
             Impact.button()
-            // Show edit profile logic
+            self.showImagePicker()
         }), for: .touchUpInside)
-        profilePicture.imageView?.contentMode = .scaleAspectFit
+        profilePicture.imageView?.contentMode = .scaleAspectFill
         profilePicture.setImage(UIImage(named: "Placeholder") ?? UIImage(), for: .normal)
         profilePicture.backgroundColor = .lightShadow
         profilePicture.layer.cornerRadius = 80 / 2
@@ -122,6 +135,42 @@ final class ProfileViewController : UIViewController {
             make.bottom.left.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalTo(200)
             make.width.equalTo(200)
+        }
+    }
+    
+    func showImagePicker() {
+        let imagePickerController = ImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.imageLimit = 1
+        imagePickerController.preferredImageSize = CGSize(width: 225, height: 225)
+        imagePickerController.hero.isEnabled = true
+        imagePickerController.modalPresentationStyle = .fullScreen
+        imagePickerController.heroModalAnimationType = .zoom
+        self.present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        imagePicker.heroModalAnimationType = .zoomOut
+        imagePicker.dismiss(animated: true, completion: nil)
+        trySetImage(image: images.first)
+    }
+    
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        imagePicker.heroModalAnimationType = .zoomOut
+        imagePicker.dismiss(animated: true, completion: nil)
+        trySetImage(image: images.first)
+    }
+    
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        imagePicker.heroModalAnimationType = .zoomOut
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    func trySetImage(image:UIImage?) {
+        guard image != nil else {return}
+        self.profilePicture.setImage(image, for: .normal)
+        if let id = Auth.auth().currentUser?.uid {
+            Backend.shared.uploadImage(id: id, image: image!)
         }
     }
 }

@@ -15,9 +15,12 @@ target 'MoonMessenger' do
   pod 'IHKeyboardAvoiding'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
-#  pod 'Firebase/Firestore'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
   pod 'JGProgressHUD'
   pod 'Firebase/Database'
+  pod 'ImagePicker'
+  pod 'Nuke', '~> 9.0'
 
 
 end

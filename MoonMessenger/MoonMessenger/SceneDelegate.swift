@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import Nuke
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -37,6 +38,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }
             }
         }
+                
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -59,8 +59,10 @@ struct Message : Hashable, Equatable, Sendable, Changeable {
     var error:Bool = false
     
     var username:String = "User"
+    
+    var userId:String = ""
         
-    init(id: UUID, text:String, origin:Origin = .outgoing, date:Date = Date(), delivered:Bool = false, seen:Bool = false, error:Bool = false, username:String = "User") {
+    init(id: UUID, text:String, origin:Origin = .outgoing, date:Date = Date(), delivered:Bool = false, seen:Bool = false, error:Bool = false, username:String = "User", userId:String = "") {
         self.text = text
         self.id = UUID()
         self.origin = origin
@@ -69,6 +71,7 @@ struct Message : Hashable, Equatable, Sendable, Changeable {
         self.seen = (origin == .outgoing ? false : true) || seen
         self.error = false
         self.username = username
+        self.userId = userId
     }
     
     static func == (lhs: Message, rhs: Message) -> Bool {

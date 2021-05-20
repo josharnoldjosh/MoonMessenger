@@ -22,7 +22,9 @@ final class AvatarBadgeBuilder {
     func build(collectionView:UICollectionView, indexPath:IndexPath) -> UICollectionReusableView? {
         if getCell(collectionView: collectionView, indexPath: indexPath) != nil && style.avatar.showIncomingAvatar && !isNotLastIncoming(collectionView: collectionView, indexPath: indexPath) {
             let avatar = collectionView.dequeueReusableSupplementaryView(ofKind: ElementKind.avatar, withReuseIdentifier: AvatarBadge.reuseIdentifier, for: indexPath) as? AvatarBadge
-            avatar?.setAvatar(style: style)
+            if let message = getCell(collectionView: collectionView, indexPath: indexPath)?.message {
+                avatar?.setAvatar(message: message, style: style)
+            }
             return avatar
         }
         

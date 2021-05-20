@@ -24,7 +24,7 @@ final class DateStampBuilder {
                                         
         if let (prev, current) = self.getMessages(collectionView: collectionView, indexPath: indexPath) { // Compare current bubble & previous bubble..?
             let delta = self.delta(A: prev.date, B: current.date)
-            if delta >= 2 {
+            if delta >= 1 {
                 let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: DateHeader.reuseIdentifier, for: indexPath) as? DateHeader
                 view?.setText(current.date.relativeTime, style: self.style)
                 return view

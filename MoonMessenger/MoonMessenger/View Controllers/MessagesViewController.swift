@@ -72,8 +72,6 @@ class MessagesViewController : UIViewController {
         view.addTapGesture { tap in
             self.view.endEditing(true)
         }
-        
-        self.chatView.alpha = 0
     }
     
     func setupUI() {
@@ -115,12 +113,11 @@ class MessagesViewController : UIViewController {
     
         chatView.didScroll = { offset in
             if offset.y <= -130 {
-                UIView.animate(withDuration: 0.2) {
+                UIView.animate(withDuration: 0.7) {
                     self.username.alpha = 0.5
                 }
             }else{
-                guard self.chatView.data.snapshot().itemIdentifiers.count > 0 else {return}
-                UIView.animate(withDuration: 0.2) {
+                UIView.animate(withDuration: 0.7) {
                     self.username.alpha = 0
                 }
             }
@@ -184,12 +181,6 @@ class MessagesViewController : UIViewController {
         Backend.shared.getConvoName(id: convo.id.uuidString) { name in
             DispatchQueue.main.async {
                 self.username.text = name
-            }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            UIView.animate(withDuration: 0.5) {
-                self.chatView.alpha = 1.0
             }
         }
     }

@@ -48,6 +48,8 @@
 		795035F8264C5B9500FF0CD9 /* ChatInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795035F7264C5B9500FF0CD9 /* ChatInputTextField.swift */; };
 		7960B1D02656FD13008C9077 /* UsernameHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7960B1CF2656FD13008C9077 /* UsernameHeader.swift */; };
 		7960B1D22656FF92008C9077 /* UsernameHeaderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7960B1D12656FF92008C9077 /* UsernameHeaderBuilder.swift */; };
+		7960B1D526570E6D008C9077 /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = 7960B1D426570E6D008C9077 /* URLImageStore */; };
+		7960B1D726570E6D008C9077 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7960B1D626570E6D008C9077 /* URLImage */; };
 		798DF3A5264EF7E000C4C305 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798DF3A4264EF7E000C4C305 /* Database.swift */; };
 		798DF3A7264F009B00C4C305 /* JoinChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798DF3A6264F009B00C4C305 /* JoinChannelViewController.swift */; };
 		79BBA0FB264CB7590048062D /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BBA0FA264CB7590048062D /* ConnectViewController.swift */; };
@@ -117,6 +119,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				598432D0A2865E9422FF66B3 /* Pods_MoonMessenger.framework in Frameworks */,
+				7960B1D526570E6D008C9077 /* URLImageStore in Frameworks */,
+				7960B1D726570E6D008C9077 /* URLImage in Frameworks */,
 				793551DE26485971001D03A7 /* Preview in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,6 +285,8 @@
 			name = MoonMessenger;
 			packageProductDependencies = (
 				793551DD26485971001D03A7 /* Preview */,
+				7960B1D426570E6D008C9077 /* URLImageStore */,
+				7960B1D626570E6D008C9077 /* URLImage */,
 			);
 			productName = MoonMessenger;
 			productReference = 792BC6B7264856B50016E411 /* MoonMessenger.app */;
@@ -311,6 +317,7 @@
 			mainGroup = 792BC6AE264856B50016E411;
 			packageReferences = (
 				793551DC26485971001D03A7 /* XCRemoteSwiftPackageReference "Preview" */,
+				7960B1D326570E6D008C9077 /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = 792BC6B8264856B50016E411 /* Products */;
 			projectDirPath = "";
@@ -631,6 +638,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		7960B1D326570E6D008C9077 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -638,6 +653,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 793551DC26485971001D03A7 /* XCRemoteSwiftPackageReference "Preview" */;
 			productName = Preview;
+		};
+		7960B1D426570E6D008C9077 /* URLImageStore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7960B1D326570E6D008C9077 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImageStore;
+		};
+		7960B1D626570E6D008C9077 /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7960B1D326570E6D008C9077 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
