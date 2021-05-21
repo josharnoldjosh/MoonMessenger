@@ -26,7 +26,9 @@ final class DataBuilder {
         return self.messages.filter({ $0.seen == true }).last?.id ?? UUID()
     }
     
-    //TODO: Based on date spacing, maybe start a new section instead of continuing a bubble...
+    /**
+     * Need to make this split different users into new sections
+     */
     func build(messages:[Message]) -> NSDiffableDataSourceSnapshot<Section, Message> {
                                          
         self.messages += messages
@@ -43,13 +45,17 @@ final class DataBuilder {
             })            
         }
 
+        
         for i in 0...self.messages.count-1 {
             
             if i < self.data.itemIdentifiers.count {
                 continue
             }
                                     
-            if data.sectionIdentifiers.last?.origin == self.messages[i].origin && i >= 1 && (self.delta(A: self.messages[i-1].date, B: self.messages[i].date) <= 2) {
+            if data.sectionIdentifiers.last?.origin == self.messages[i].origin && i >= 1
+                && (self.delta(A: self.messages[i-1].date, B: self.messages[i].date) <= 2
+                && self.messages[i-1].userId == self.messages[i].userId // new line here, delete if issues!
+            ) {
                 
                 // Update previous message's rounding from basic -> top
                 if count(data.sectionIdentifiers.last!) == 1 {

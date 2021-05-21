@@ -20,14 +20,24 @@ final class AvatarBadgeBuilder {
     }
     
     func build(collectionView:UICollectionView, indexPath:IndexPath) -> UICollectionReusableView? {
-        if getCell(collectionView: collectionView, indexPath: indexPath) != nil && style.avatar.showIncomingAvatar && !isNotLastIncoming(collectionView: collectionView, indexPath: indexPath) {
-            let avatar = collectionView.dequeueReusableSupplementaryView(ofKind: ElementKind.avatar, withReuseIdentifier: AvatarBadge.reuseIdentifier, for: indexPath) as? AvatarBadge
-            if let message = getCell(collectionView: collectionView, indexPath: indexPath)?.message {
+//        if getCell(collectionView: collectionView, indexPath: indexPath) != nil && style.avatar.showIncomingAvatar && !isNotLastIncoming(collectionView: collectionView, indexPath: indexPath) {
+//            let avatar = collectionView.dequeueReusableSupplementaryView(ofKind: ElementKind.avatar, withReuseIdentifier: AvatarBadge.reuseIdentifier, for: indexPath) as? AvatarBadge
+//            if let message = getCell(collectionView: collectionView, indexPath: indexPath)?.message {
+//                avatar?.setAvatar(message: message, style: style)
+//            }
+//            return avatar
+//        }
+                        
+        if let message = getCell(collectionView: collectionView, indexPath: indexPath)?.message
+        {
+            //TODO: check if this message is last in section
+            if true {
+                let avatar = collectionView.dequeueReusableSupplementaryView(ofKind: ElementKind.avatar, withReuseIdentifier: AvatarBadge.reuseIdentifier, for: indexPath) as? AvatarBadge
                 avatar?.setAvatar(message: message, style: style)
+                return avatar
             }
-            return avatar
         }
-        
+                
         let empty = collectionView.dequeueReusableSupplementaryView(ofKind: ElementKind.avatar, withReuseIdentifier: EmptyAvatar.reuseIdentifier, for: indexPath) as? EmptyAvatar
         return empty
     }

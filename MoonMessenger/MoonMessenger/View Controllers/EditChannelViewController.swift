@@ -12,9 +12,10 @@ import Preview
 import Closures
 import PopBounceButton
 import JGProgressHUD
+import ImagePicker
 
 
-class EditChannelViewController : UIViewController {
+class EditChannelViewController : UIViewController, ImagePickerDelegate {
     
     var back:BackButton!
     var profilePicture:PopBounceButton!
@@ -52,6 +53,20 @@ class EditChannelViewController : UIViewController {
                 self.textfield.textfield.text = name
             }
         }
+        
+        self.profilePicture.alpha = 0
+        Backend.shared.getImage(id: convo.id.uuidString) { image in
+            self.profilePicture.setImage(image, for: .normal)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            UIView.animate(withDuration: 0.5) {
+                self.profilePicture.alpha = 1
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,9 +84,9 @@ class EditChannelViewController : UIViewController {
         profilePicture = PopBounceButton()
         profilePicture.addAction(UIAction(handler: { tap in
             Impact.button()
-            // Show edit profile logic
+            self.showImagePicker()
         }), for: .touchUpInside)
-        profilePicture.imageView?.contentMode = .scaleAspectFit
+        profilePicture.imageView?.contentMode = .scaleAspectFill
         profilePicture.setImage(UIImage(named: "Placeholder") ?? UIImage(), for: .normal)
         profilePicture.backgroundColor = .lightShadow
         profilePicture.layer.cornerRadius = 70 / 2
@@ -140,6 +155,40 @@ class EditChannelViewController : UIViewController {
         hud.show(in: self.view)
         self.view.isUserInteractionEnabled = true
         hud.dismiss(afterDelay: 0.5, animated: true)
+    }
+    
+    func showImagePicker() {
+        let imagePickerController = ImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.imageLimit = 1
+        imagePickerController.preferredImageSize = CGSize(width: 225, height: 225)
+        imagePickerController.hero.isEnabled = true
+        imagePickerController.modalPresentationStyle = .fullScreen
+        imagePickerController.heroModalAnimationType = .zoom
+        self.present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        imagePicker.heroModalAnimationType = .zoomOut
+        imagePicker.dismiss(animated: true, completion: nil)
+        trySetImage(image: images.first)
+    }
+    
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        imagePicker.heroModalAnimationType = .zoomOut
+        imagePicker.dismiss(animated: true, completion: nil)
+        trySetImage(image: images.first)
+    }
+    
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        imagePicker.heroModalAnimationType = .zoomOut
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    func trySetImage(image:UIImage?) {
+        guard image != nil else {return}
+        self.profilePicture.setImage(image, for: .normal)
+        Backend.shared.uploadImage(id: convo.id.uuidString, image: image!)
     }
 }
 

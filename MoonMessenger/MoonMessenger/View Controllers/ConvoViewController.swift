@@ -125,6 +125,10 @@ final class ConvoCell : UICollectionViewCell {
     func applyData(item:ConvoItem) {
         imageView.image = item.image
         
+        Backend.shared.getImage(id: item.id.uuidString) { image in
+            self.imageView.image = image
+        }
+        
         Backend.shared.getConvoName(id: item.id.uuidString) { name in
             DispatchQueue.main.async {                            
                 self.username.attributedText = NSAttributedString(

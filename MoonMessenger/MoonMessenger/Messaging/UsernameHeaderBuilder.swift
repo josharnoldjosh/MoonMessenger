@@ -24,8 +24,7 @@ final class UsernameHeaderBuilder {
         if let cell = getCell(collectionView: collectionView, indexPath: indexPath) {
                                     
             if cell.message?.origin == .incoming {
-                let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: UsernameHeader.reuseIdentifier, for: indexPath) as? UsernameHeader
-                print(cell.message)
+                let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: UsernameHeader.reuseIdentifier, for: indexPath) as? UsernameHeader                
                 view?.setText(cell.message?.username ?? "User", style: self.style)
                 return view
             }

@@ -72,6 +72,10 @@ class MessagesViewController : UIViewController {
         view.addTapGesture { tap in
             self.view.endEditing(true)
         }
+        
+        Backend.shared.getImage(id: convo.id.uuidString) { image in
+            self.profilePicture.setImage(image, for: .normal)
+        }
     }
     
     func setupUI() {
@@ -80,7 +84,7 @@ class MessagesViewController : UIViewController {
         profilePicture.backgroundColor = .darkShadow
         profilePicture.layer.cornerRadius = 50/2
         profilePicture.layer.masksToBounds = true
-        profilePicture.contentMode = .scaleAspectFill
+        profilePicture.imageView?.contentMode = .scaleAspectFill
         profilePicture.addAction(UIAction(handler: { tap in
             self.editChannelDetails()
         }), for: .touchUpInside)

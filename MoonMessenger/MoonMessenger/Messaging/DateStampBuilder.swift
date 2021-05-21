@@ -130,12 +130,11 @@ extension Date {
             return "\(self.minutesFromNow)m ago"
         }
         
-        if hoursFromNow <= 24 {
+        if hoursFromNow <= 48 {
+            if isInYesterday {
+                return "YESTERDAY " + self.time
+            }
             return self.time
-        }
-        
-        if isInYesterday {
-            return "YESTERDAY " + self.time
         }
         
         if daysFromNow <= 7 {
