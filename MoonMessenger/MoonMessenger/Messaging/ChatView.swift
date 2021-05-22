@@ -14,6 +14,7 @@ struct ElementKind  {
     static let seen = "seen-element-kind"
     static let date = "date-element-kind"
     static let username = "username-element-kind"
+    static let empty = "empty-element-kind"
 }
 
 
@@ -81,7 +82,7 @@ final class ChatView : UIView, UIScrollViewDelegate {
         collectionView.register(EmptyUsernameHeader.self, forSupplementaryViewOfKind: ElementKind.username, withReuseIdentifier: EmptyUsernameHeader.reuseIdentifier)
         
         // Empty Header, a.k.a, nothing
-        collectionView.register(EmptyHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: EmptyHeader.reuseIdentifier)
+//        collectionView.register(EmptyHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: EmptyHeader.reuseIdentifier)
         
         // Avatar
         collectionView.register(AvatarBadge.self, forSupplementaryViewOfKind: ElementKind.avatar, withReuseIdentifier: AvatarBadge.reuseIdentifier)
@@ -94,6 +95,9 @@ final class ChatView : UIView, UIScrollViewDelegate {
         
         // Empty Seen
         collectionView.register(EmptySeenBadge.self, forSupplementaryViewOfKind: ElementKind.seen, withReuseIdentifier: EmptySeenBadge.reuseIdentifier)
+        
+        // Empty
+        collectionView.register(EmptyHeader.self, forSupplementaryViewOfKind: ElementKind.empty, withReuseIdentifier: EmptyHeader.reuseIdentifier)
     }
     
     func getLayout() -> UICollectionViewCompositionalLayout {
@@ -109,7 +113,7 @@ final class ChatView : UIView, UIScrollViewDelegate {
         section.interGroupSpacing = self.style.layout.sameMessageSpacing
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = self.style.layout.uniqueMessageSpacing
-        section.boundarySupplementaryItems = [makeDateHeader(), makeUsernameHeader()]
+        section.boundarySupplementaryItems = [makeDateHeader(), makeUsernameHeader(), makeEmpty()]
         return UICollectionViewCompositionalLayout.init(section: section, configuration: config)
     }
     
@@ -123,7 +127,7 @@ final class ChatView : UIView, UIScrollViewDelegate {
     
     func makeDateHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         return NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(10)),
+            layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(40)),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
         )
@@ -143,6 +147,14 @@ final class ChatView : UIView, UIScrollViewDelegate {
         let size = NSCollectionLayoutSize(widthDimension: .absolute(scale), heightDimension: .absolute(scale))
         let badge = NSCollectionLayoutSupplementaryItem(layoutSize: size, elementKind: ElementKind.seen, containerAnchor: anchor)
         return badge
+    }
+    
+    func makeEmpty() -> NSCollectionLayoutBoundarySupplementaryItem {
+        return NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(0)),
+            elementKind: ElementKind.empty,
+            alignment: .top
+        )
     }
     
     func setupData() {
@@ -194,7 +206,9 @@ final class ChatView : UIView, UIScrollViewDelegate {
         data.supplementaryViewProvider = { collectionView, kind, indexPath in
                         
             if kind == UICollectionView.elementKindSectionHeader {
-                return DateStampBuilder(data: self.data, style: self.style).build(collectionView: collectionView, kind: kind, indexPath: indexPath)
+                if let view = DateStampBuilder(data: self.data, style: self.style).build(collectionView: collectionView, kind: kind, indexPath: indexPath) {
+                    return view
+                }
             }
             
             if kind == ElementKind.username {
@@ -208,7 +222,13 @@ final class ChatView : UIView, UIScrollViewDelegate {
             if kind == ElementKind.seen {
                 return SeenBadgeBuilder(data: self.data, style: self.style).build(collectionView: collectionView, indexPath: indexPath)
             }
-            return nil
+            
+//            if kind == ElementKind.empty {
+//
+//            }
+            
+            return collectionView.dequeueReusableSupplementaryView(ofKind: ElementKind.empty, withReuseIdentifier: EmptyHeader.reuseIdentifier, for: indexPath) as? EmptyHeader
+            
         }
     }
     }

@@ -36,8 +36,8 @@ final class DateStampBuilder {
         }
          
         // Return no header
-        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: EmptyHeader.reuseIdentifier, for: indexPath) as? EmptyHeader
-        return view
+//        let view = collectionView.dequeueReusableSupplementaryView(ofKind: ElementKind.empty, withReuseIdentifier: EmptyHeader.reuseIdentifier, for: indexPath) as? EmptyHeader
+        return nil
     }
         
     func getCell(collectionView:UICollectionView, indexPath:IndexPath) -> BubbleCell? {

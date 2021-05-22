@@ -29,9 +29,8 @@ final class AvatarBadgeBuilder {
 //        }
                         
         if let message = getCell(collectionView: collectionView, indexPath: indexPath)?.message
-        {
-            //TODO: check if this message is last in section
-            if true {
+        {            
+            if messageIsLastInItsSection(message: message) {
                 let avatar = collectionView.dequeueReusableSupplementaryView(ofKind: ElementKind.avatar, withReuseIdentifier: AvatarBadge.reuseIdentifier, for: indexPath) as? AvatarBadge
                 avatar?.setAvatar(message: message, style: style)
                 return avatar
@@ -57,5 +56,14 @@ final class AvatarBadgeBuilder {
         }
         let finalMessage = snap.itemIdentifiers[next]
         return finalMessage.origin == .incoming
+    }
+    
+    func messageIsLastInItsSection(message: Message) -> Bool {
+        let snap = self.data.snapshot()
+        if let section = snap.sectionIdentifier(containingItem: message) {
+            let lastMessage = snap.itemIdentifiers(inSection: section).last
+            return message == lastMessage
+        }
+        return false
     }
 }

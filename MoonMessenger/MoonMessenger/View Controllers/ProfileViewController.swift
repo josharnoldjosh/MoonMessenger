@@ -101,7 +101,7 @@ final class ProfileViewController : UIViewController, ImagePickerDelegate {
             // logout
             try? Auth.auth().signOut()
         })
-        logout.contentMode = .scaleAspectFit
+        logout.button.imageView?.contentMode = .scaleAspectFit
         view.addSubview(logout)
         
     }

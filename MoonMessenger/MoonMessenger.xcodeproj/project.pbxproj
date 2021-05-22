@@ -53,10 +53,10 @@
 		798DF3A5264EF7E000C4C305 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798DF3A4264EF7E000C4C305 /* Database.swift */; };
 		798DF3A7264F009B00C4C305 /* JoinChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798DF3A6264F009B00C4C305 /* JoinChannelViewController.swift */; };
 		79BBA0FB264CB7590048062D /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BBA0FA264CB7590048062D /* ConnectViewController.swift */; };
+		79D3F8A426587EBD008BA7DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79D3F8A326587EBD008BA7DB /* GoogleService-Info.plist */; };
 		79EAD00A26503ED500D989F8 /* EditChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAD00926503ED500D989F8 /* EditChannelViewController.swift */; };
 		79EAD00C2650435D00D989F8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAD00B2650435D00D989F8 /* SettingsViewController.swift */; };
 		79EAD00E26504C3800D989F8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAD00D26504C3800D989F8 /* ProfileViewController.swift */; };
-		79F3CAFE264EED8800191CF7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79F3CAFD264EED8800191CF7 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,10 +105,10 @@
 		798DF3A4264EF7E000C4C305 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		798DF3A6264F009B00C4C305 /* JoinChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChannelViewController.swift; sourceTree = "<group>"; };
 		79BBA0FA264CB7590048062D /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
+		79D3F8A326587EBD008BA7DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		79EAD00926503ED500D989F8 /* EditChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChannelViewController.swift; sourceTree = "<group>"; };
 		79EAD00B2650435D00D989F8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		79EAD00D26504C3800D989F8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		79F3CAFD264EED8800191CF7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8DC0316EF88765DAAC3CAE22 /* Pods-MoonMessenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoonMessenger.release.xcconfig"; path = "Target Support Files/Pods-MoonMessenger/Pods-MoonMessenger.release.xcconfig"; sourceTree = "<group>"; };
 		B8562D25EE9919033B17DE4C /* Pods-MoonMessenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoonMessenger.debug.xcconfig"; path = "Target Support Files/Pods-MoonMessenger/Pods-MoonMessenger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,7 +198,7 @@
 		793551E226485CA8001D03A7 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				79F3CAFD264EED8800191CF7 /* GoogleService-Info.plist */,
+				79D3F8A326587EBD008BA7DB /* GoogleService-Info.plist */,
 				793551E6264861CB001D03A7 /* Pacifico-Regular.ttf */,
 				793551E026485CA5001D03A7 /* Style.swift */,
 				798DF3A4264EF7E000C4C305 /* Database.swift */,
@@ -338,7 +338,7 @@
 				792BC6C7264856B60016E411 /* LaunchScreen.storyboard in Resources */,
 				792BC6C4264856B60016E411 /* Assets.xcassets in Resources */,
 				7948A8D62649C2E400FDF493 /* Moon_Base_Color.png in Resources */,
-				79F3CAFE264EED8800191CF7 /* GoogleService-Info.plist in Resources */,
+				79D3F8A426587EBD008BA7DB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,7 +578,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dev.neptune;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dev.neptuneapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -599,7 +599,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dev.neptune;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dev.neptuneapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
